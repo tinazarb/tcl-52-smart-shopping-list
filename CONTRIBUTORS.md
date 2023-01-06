@@ -6,7 +6,7 @@ Add yourself as a contributor to this project as a Markdown link that links your
 
 ## Cohort Participants
 
-- [Nicole Schnurr](https://github.com/DwightTheShark) ❤️
+- [Nicole Schnurr](https://github.com/DwightTheShark) ❤️✊
 - [Elizabeth Hammes](https://github.com/ehammes) 🐶👩‍💻
 
 ## Mentors
