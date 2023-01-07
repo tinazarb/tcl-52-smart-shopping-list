@@ -8,6 +8,7 @@ Add yourself as a contributor to this project as a Markdown link that links your
 
 - [Nicole Schnurr](https://github.com/DwightTheShark) ❤️✊
 - [Elizabeth Hammes](https://github.com/ehammes) 🐶👩‍💻
+- [Louie Knolle](https://github.com/louieknolle)🏕️
 
 ## Mentors
 
