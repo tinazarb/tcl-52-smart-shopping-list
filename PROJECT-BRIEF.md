@@ -20,40 +20,40 @@ Pairings will go as follows:
 
 #### Week 1, January 8 - 14
 
-1. Louis & Nicole
+1. Louie & Nicole
 2. Tina & Elizabeth
 
 #### Week 2, January 15 - 21
 
 1. Nicole & Tina
-2. Louis & Elizabeth
+2. Louie & Elizabeth
 
 #### Week 3, January 22 - 28
 
-1. Tina & Louis
+1. Tina & Louie
 2. Elizabeth & Nicole
 
 #### Week 4, January 29 - February 4
 
-1. Louis & Nicole
+1. Louie & Nicole
 2. Tina & Elizabeth
 
 #### Week 5, February 5 - 11
 
 1. Nicole & Tina
-2. Louis & Elizabeth
+2. Louie & Elizabeth
 
 #### Week 6, February 12 - 18
 
-1. Tina & Louis
+1. Tina & Louie
 2. Elizabeth & Nicole
 
 #### Week 7, February 19 - 25
 
-1. Louis & Nicole
+1. Louie & Nicole
 2. Tina & Elizabeth
 
 #### Week 8, February 26 - March 4
 
 1. Nicole & Tina
-2. Louis & Elizabeth
+2. Louie & Elizabeth
