@@ -47,8 +47,6 @@ export function App() {
 		});
 	}, [listToken]);
 
-	console.log(data);
-
 	return (
 		<Router>
 			<Routes>
