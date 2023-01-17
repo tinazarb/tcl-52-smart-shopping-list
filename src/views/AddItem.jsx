@@ -12,9 +12,9 @@ export function AddItem({ listToken }) {
 	};
 
 	//buyNext radio behaviours
-	const soon = ['7'];
-	const kindOfSoon = ['14'];
-	const notSoon = ['30'];
+	const soon = '7';
+	const kindOfSoon = '14';
+	const notSoon = '30';
 
 	const [nextPurchase, setNextPurchase] = useState(soon);
 
@@ -57,41 +57,53 @@ export function AddItem({ listToken }) {
 		<div>
 			<form onSubmit={submitForm}>
 				<div>
-					<label htmlFor="itemName">Item Name:</label>
-					<input
-						type="text"
-						name="itemName"
-						value={itemName}
-						onChange={handleChangeItem}
-					/>
+					<label htmlFor="itemName">
+						Item Name:
+						<input
+							type="text"
+							name="itemName"
+							value={itemName}
+							onChange={handleChangeItem}
+						/>
+					</label>
 				</div>
 				<div>
 					<label htmlFor="buyAgain">How soon will you buy this again?</label>
 					<fieldset>
-						<label htmlFor="soon">Soon</label>
-						<input
-							type="radio"
-							id="soon"
-							value={soon}
-							checked={nextPurchase === soon}
-							onChange={handleChange}
-						/>
-						<label htmlFor="kindOfSoon">Kind Of Soon</label>
-						<input
-							type="radio"
-							id="kindOfSoon"
-							value={soon}
-							checked={nextPurchase === kindOfSoon}
-							onChange={handleChange}
-						/>
-						<label htmlFor="notSoon">Not Soon</label>
-						<input
-							type="radio"
-							id="notSoon"
-							value={soon}
-							checked={nextPurchase === notSoon}
-							onChange={handleChange}
-						/>
+						<label htmlFor="soon">
+							<input
+								type="radio"
+								id="soon"
+								name="buyAgain"
+								value={soon}
+								checked={nextPurchase === soon}
+								onChange={handleChange}
+							/>
+							Soon
+						</label>
+						<label htmlFor="kindOfSoon">
+							<input
+								type="radio"
+								id="kindOfSoon"
+								name="buyAgain"
+								value={kindOfSoon}
+								checked={nextPurchase === kindOfSoon}
+								onChange={handleChange}
+								required="required"
+							/>
+							Kind Of Soon
+						</label>
+						<label htmlFor="notSoon">
+							<input
+								type="radio"
+								id="notSoon"
+								name="buyAgain"
+								value={notSoon}
+								checked={nextPurchase === notSoon}
+								onChange={handleChange}
+							/>
+							Not Soon
+						</label>
 					</fieldset>
 				</div>
 				<button type="submit">Add Item</button>
