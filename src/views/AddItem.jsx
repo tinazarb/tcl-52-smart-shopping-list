@@ -6,7 +6,7 @@ export function AddItem({ listToken }) {
 	//itemName behaviour
 	const [itemName, setItemName] = useState('');
 
-	const [handleChangeItem] = (e) => {
+	const handleChangeItem = (e) => {
 		e.preventDefault();
 		setItemName(e.target.value);
 	};
@@ -18,7 +18,7 @@ export function AddItem({ listToken }) {
 
 	const [nextPurchase, setNextPurchase] = useState(soon);
 
-	const [handleChange] = (e) => {
+	const handleChange = (e) => {
 		setNextPurchase(e.target.value);
 	};
 
