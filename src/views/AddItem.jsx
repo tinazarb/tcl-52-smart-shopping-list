@@ -68,8 +68,8 @@ export function AddItem({ listToken }) {
 					</label>
 				</div>
 				<div>
-					<label htmlFor="buyAgain">How soon will you buy this again?</label>
 					<fieldset>
+						<legend>How soon will you buy this again?</legend>
 						<label htmlFor="soon">
 							<input
 								type="radio"
