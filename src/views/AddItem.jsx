@@ -116,4 +116,3 @@ export function AddItem({ listToken }) {
 }
 
 // lower banner display that disappears on either next submission OR leaving the page
-// change console log to display
