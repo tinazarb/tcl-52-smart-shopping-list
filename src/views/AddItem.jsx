@@ -1,6 +1,7 @@
+// TODO lower banner display that disappears on either next submission OR leaving the page
+
 import { addItem } from '../api/firebase';
 import { useState } from 'react';
-// import { list } from "./List"
 
 export function AddItem({ listToken }) {
 	//itemName behaviour
@@ -110,5 +111,3 @@ export function AddItem({ listToken }) {
 		</div>
 	);
 }
-
-// TODO lower banner display that disappears on either next submission OR leaving the page
