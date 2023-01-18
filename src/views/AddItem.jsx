@@ -29,7 +29,9 @@ export function AddItem({ listToken }) {
 		e.preventDefault();
 		//if they don't put anything in
 		if (itemName === '') {
-			console.log('ladies, theydies and gentlemen, you need to submit a name');
+			setSubmissionYes(
+				'ladies, theydies and gentlemen, you need to submit a name',
+			);
 			return;
 		}
 
@@ -112,3 +114,6 @@ export function AddItem({ listToken }) {
 		</div>
 	);
 }
+
+// lower banner display that disappears on either next submission OR leaving the page
+// change console log to display
