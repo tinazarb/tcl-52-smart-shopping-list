@@ -29,9 +29,7 @@ export function AddItem({ listToken }) {
 		e.preventDefault();
 		//if they don't put anything in
 		if (itemName === '') {
-			setSubmissionYes(
-				'ladies, theydies and gentlemen, you need to submit a name',
-			);
+			setSubmissionYes('The item name cannot be blank :|');
 			return;
 		}
 
@@ -47,11 +45,9 @@ export function AddItem({ listToken }) {
 		if (submission) {
 			setItemName('');
 			setNextPurchase(soon);
-			setSubmissionYes(`Tina says ${itemName} is on yo' list!`);
+			setSubmissionYes(`${itemName} is on your list :D`);
 		} else {
-			setSubmissionYes(
-				'Yo homie, the submission is not working! Try again, we promise we will try harder',
-			);
+			setSubmissionYes('Something went wrong, please try again :D');
 		}
 	};
 
@@ -115,4 +111,4 @@ export function AddItem({ listToken }) {
 	);
 }
 
-// lower banner display that disappears on either next submission OR leaving the page
+// TODO lower banner display that disappears on either next submission OR leaving the page
