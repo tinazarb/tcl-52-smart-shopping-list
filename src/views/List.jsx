@@ -26,6 +26,7 @@ export function List({ data }) {
 				<input
 					id="filter"
 					type="text"
+					inputmode="search"
 					value={searchedItem}
 					onChange={handleChange}
 					placeholder="Start Typing here..."
