@@ -25,7 +25,7 @@ export function List({ data }) {
 				<label htmlFor="filter">Filter Items:</label>
 				<input
 					id="filter"
-					type="search"
+					type="text"
 					value={searchedItem}
 					onChange={handleChange}
 					placeholder="Start Typing here..."
