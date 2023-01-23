@@ -12,6 +12,10 @@ export function List({ data }) {
 		item.name.toLowerCase().includes(searchedItem.toLowerCase()),
 	);
 
+	function buttonClick(e) {
+		setSearchedItem('');
+	}
+
 	return (
 		<>
 			<p>
@@ -26,6 +30,9 @@ export function List({ data }) {
 					onChange={handleChange}
 					placeholder="Start Typing here..."
 				/>
+				<button type="button" onClick={buttonClick}>
+					Clear
+				</button>
 			</form>
 			<ul>
 				{!filteredItems.length ? (
