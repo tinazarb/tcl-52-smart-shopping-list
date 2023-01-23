@@ -2,16 +2,17 @@ import { ListItem } from '../components';
 import { useState } from 'react';
 
 export function List({ data }) {
+	//set state
 	const [searchedItem, setSearchedItem] = useState('');
-
-	function handleChange(e) {
-		setSearchedItem(e.target.value);
-	}
-
+	//filtering items searched
 	const filteredItems = data.filter((item) =>
 		item.name.toLowerCase().includes(searchedItem.toLowerCase()),
 	);
-
+	//setting where to get searched item value
+	function handleChange(e) {
+		setSearchedItem(e.target.value);
+	}
+	//telling the button to clear the search field
 	function buttonClick(e) {
 		setSearchedItem('');
 	}
@@ -31,7 +32,11 @@ export function List({ data }) {
 					onChange={handleChange}
 					placeholder="Start Typing here..."
 				/>
-				<button type="button" onClick={buttonClick}>
+				<button
+					type="button"
+					onClick={buttonClick}
+					disabled={searchedItem.length === 0}
+				>
 					Clear
 				</button>
 			</form>
