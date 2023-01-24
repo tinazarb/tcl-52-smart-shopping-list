@@ -62,17 +62,7 @@ export function App() {
 		<Router>
 			<Routes>
 				<Route path="/" element={<Layout />}>
-					<Route
-						index
-						element={
-							//if user has listToken, Navigate redirects away from home to List
-							listToken ? (
-								<Navigate to="/list" />
-							) : (
-								<Home handleNewToken={handleNewToken} />
-							)
-						}
-					/>
+					<Route index element={<Home handleNewToken={handleNewToken} />} />
 					<Route path="/list" element={<List data={data} />} />
 					<Route path="/add-item" element={<AddItem listToken={listToken} />} />
 				</Route>
