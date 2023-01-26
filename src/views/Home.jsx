@@ -3,18 +3,18 @@ import { useCallback, useState } from 'react';
 import { checkListToken } from '../api/firebase';
 import { useNavigate } from 'react-router-dom';
 
-export function Home({ handleNewToken, setListToken }) {
+export function Home({ handleNewToken, setListToken, listToken }) {
 	const [token, setToken] = useState('');
 	const [listNotFound, setlistNotFound] = useState('');
 	const redirect = useNavigate();
 
+	if (listToken) {
+		redirect('/list');
+	}
+
 	const handleClick = useCallback(() => {
 		handleNewToken();
 	}, [handleNewToken]);
-
-	if (handleClick) {
-		redirect('/list');
-	}
 
 	const handleFormChange = (e) => {
 		const value = e.target.value;
