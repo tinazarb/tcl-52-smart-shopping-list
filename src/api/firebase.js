@@ -90,5 +90,5 @@ export async function checkListToken(listId) {
 	const listTokenQuery = query(collection(db, listId));
 	const listTokenSnapshot = await getDocs(listTokenQuery);
 
-	return listTokenSnapshot;
+	return listTokenSnapshot.docs.length;
 }

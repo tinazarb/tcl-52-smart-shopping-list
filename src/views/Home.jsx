@@ -1,9 +1,12 @@
 import './Home.css';
 import { useCallback, useState } from 'react';
 import { checkListToken } from '../api/firebase';
+import { useNavigate } from 'react-router-dom';
 
 export function Home({ handleNewToken, setListToken }) {
 	const [token, setToken] = useState('');
+	const [listNotFound, setlistNotFound] = useState('');
+	const redirect = useNavigate();
 
 	const handleClick = useCallback(() => {
 		handleNewToken();
@@ -21,8 +24,9 @@ export function Home({ handleNewToken, setListToken }) {
 
 		if (checkTokenExists) {
 			setListToken(token);
+			redirect('/list');
 		} else {
-			alert('Could not find this list');
+			setlistNotFound('Could not find this list');
 		}
 	};
 
@@ -44,6 +48,7 @@ export function Home({ handleNewToken, setListToken }) {
 				/>
 				<button type="submit"> Join</button>
 			</form>
+			<p>{listNotFound}</p>
 		</div>
 	);
 }
