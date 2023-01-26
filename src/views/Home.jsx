@@ -12,6 +12,10 @@ export function Home({ handleNewToken, setListToken }) {
 		handleNewToken();
 	}, [handleNewToken]);
 
+	if (handleClick) {
+		redirect('/list');
+	}
+
 	const handleFormChange = (e) => {
 		const value = e.target.value;
 		setToken(value);
