@@ -49,8 +49,13 @@ export function Home({ handleNewToken, setListToken, listToken }) {
 					id="token"
 					value={token}
 					onChange={handleFormChange}
+					aria-describedby="token-desc"
 				/>
 				<button type="submit"> Join</button>
+				<div id="token-desc">
+					A token is three space-separated words, like{' '}
+					<code>my list token</code>
+				</div>
 			</form>
 			<p>{listNotFound}</p>
 		</div>
