@@ -23,11 +23,11 @@ export function Home({ handleNewToken, setListToken, listToken }) {
 
 	const handleTokenSubmit = async (e) => {
 		e.preventDefault();
-
-		const checkTokenExists = await checkListToken(token);
+		const caseSensitiveToken = token.toLowerCase();
+		const checkTokenExists = await checkListToken(caseSensitiveToken);
 
 		if (checkTokenExists) {
-			setListToken(token);
+			setListToken(caseSensitiveToken);
 			redirect('/list');
 		} else {
 			setlistNotFound('Could not find this list');
