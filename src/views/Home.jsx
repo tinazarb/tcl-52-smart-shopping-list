@@ -49,6 +49,7 @@ export function Home({ handleNewToken, setListToken, listToken }) {
 					id="token"
 					value={token}
 					onChange={handleFormChange}
+					required
 					aria-describedby="token-desc"
 				/>
 				<button type="submit"> Join</button>
