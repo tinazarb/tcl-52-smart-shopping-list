@@ -1,12 +1,9 @@
 import './ListItem.css';
 import { useState } from 'react';
-// import { updateItem } from '../api';
+import { updateItem } from '../api';
 
 export function ListItem({ name, data, listToken }) {
 	const [itemPurchased, setItemPurchased] = useState('');
-
-	console.log(data, 'data');
-	console.log(itemPurchased, 'itemPurchased');
 
 	const itemData = {
 		id: data.id,
@@ -19,7 +16,7 @@ export function ListItem({ name, data, listToken }) {
 
 		if (isChecked) {
 			setItemPurchased(itemData);
-			// updateItem(listToken, itemPurchased)
+			updateItem(listToken, data.id, itemPurchased);
 		}
 	};
 
