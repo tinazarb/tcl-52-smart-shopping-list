@@ -3,22 +3,25 @@ import { useState } from 'react';
 import { updateItem } from '../api';
 
 export function ListItem({ name, data, listToken }) {
-	const [itemPurchased, setItemPurchased] = useState('');
+	const [isChecked, setIsChecked] = useState(false);
 
 	const itemData = {
 		id: data.id,
 		dateLastPurchased: new Date(),
-		totalPurchases: 1,
+		totalPurchases: data.totalPurchases + 1,
 	};
 
 	const handleSelect = (e) => {
-		let isChecked = e.target.checked;
+		let nextChecked = e.target.checked;
 
-		if (isChecked) {
-			setItemPurchased(itemData);
-			updateItem(listToken, data.id, itemPurchased);
+		// toggling isChecked based on checkbox state
+		setIsChecked(nextChecked);
+		if (nextChecked) {
+			updateItem(listToken, data.id, itemData);
 		}
 	};
+
+	console.log(isChecked, 'itemPurchased');
 
 	return (
 		<>
@@ -28,7 +31,7 @@ export function ListItem({ name, data, listToken }) {
 					type="checkbox"
 					id="listItem"
 					value={name}
-					checked={itemPurchased}
+					checked={isChecked}
 					onChange={handleSelect}
 				/>
 				<label htmlFor="listItem" className="ListItem-label">
