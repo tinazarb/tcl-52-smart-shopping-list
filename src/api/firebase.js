@@ -72,16 +72,9 @@ export async function addItem(listId, { itemName, daysUntilNextPurchase }) {
 	});
 }
 
-export async function updateItem(
-	listId,
-	itemId,
-	{ dateLastPurchased, totalPurchases },
-) {
+export async function updateItem(listId, itemId, nextData) {
 	const itemRef = doc(db, listId, itemId);
-	return await updateDoc(itemRef, {
-		dateLastPurchased,
-		totalPurchases,
-	});
+	return await updateDoc(itemRef, nextData);
 }
 
 export async function deleteItem() {
