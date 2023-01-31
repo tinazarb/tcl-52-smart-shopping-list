@@ -3,7 +3,10 @@ import { useState } from 'react';
 import { updateItem } from '../api';
 
 export function ListItem({ name, data, listToken }) {
-	const [isChecked, setIsChecked] = useState(false);
+	const initialChecked =
+		Date.now() - data.dateLastPurchased.toMillis() < 86400000;
+
+	const [isChecked, setIsChecked] = useState(initialChecked);
 
 	const itemData = {
 		id: data.id,
@@ -20,8 +23,6 @@ export function ListItem({ name, data, listToken }) {
 			updateItem(listToken, data.id, itemData);
 		}
 	};
-
-	console.log(isChecked, 'itemPurchased');
 
 	return (
 		<>
