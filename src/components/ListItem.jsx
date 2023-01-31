@@ -8,19 +8,18 @@ export function ListItem({ name, data, listToken }) {
 
 	const [isChecked, setIsChecked] = useState(initialChecked);
 
-	const itemData = {
-		id: data.id,
-		dateLastPurchased: new Date(),
-		totalPurchases: data.totalPurchases + 1,
-	};
-
 	const handleSelect = (e) => {
 		let nextChecked = e.target.checked;
 
 		// toggling isChecked based on checkbox state
 		setIsChecked(nextChecked);
 		if (nextChecked) {
-			updateItem(listToken, data.id, itemData);
+			const nextData = {
+				dateLastPurchased: new Date(),
+				totalPurchases: data.totalPurchases + 1,
+			};
+
+			updateItem(listToken, data.id, nextData);
 		}
 	};
 
