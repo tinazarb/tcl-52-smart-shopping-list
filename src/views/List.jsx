@@ -1,5 +1,6 @@
 import { ListItem } from '../components';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export function List({ data }) {
 	//set state
@@ -17,38 +18,59 @@ export function List({ data }) {
 		setSearchedItem('');
 	}
 
+	const navigate = useNavigate();
+
+	function handleNavigate(e) {
+		navigate('/add-item');
+	}
+
 	return (
 		<>
-			<p>
-				Hello from the <code>/list</code> page!
-			</p>
-			<form>
-				<label htmlFor="filter">Filter Items:</label>
-				<input
-					id="filter"
-					type="text"
-					inputmode="search"
-					value={searchedItem}
-					onChange={handleChange}
-					placeholder="Start Typing here..."
-				/>
-				<button
-					type="button"
-					onClick={buttonClick}
-					disabled={searchedItem.length === 0}
-				>
-					Clear
-				</button>
-			</form>
-			<ul>
-				{!filteredItems.length ? (
-					<p>It's not here!</p>
-				) : (
-					filteredItems.map((list) => {
-						return <ListItem name={list.name} key={list.id} />;
-					})
-				)}
-			</ul>
+			{/* welcome people to add to their list if it's empty */}
+			{data.length === 0 ? (
+				<div>
+					<h1>Hello!</h1>
+					<h2>
+						You have nothing on your list yet! Click here to add your first
+						item:
+					</h2>
+					<button onClick={handleNavigate} type="button">
+						Add item page
+					</button>
+				</div>
+			) : (
+				// otherwise show people their list
+				<div>
+					<h1>Welcome back!</h1>
+					<form>
+						<label htmlFor="filter">Filter Items:</label>
+						<input
+							id="filter"
+							type="text"
+							inputmode="search"
+							value={searchedItem}
+							onChange={handleChange}
+							placeholder="Start Typing here..."
+						/>
+						<button
+							type="button"
+							onClick={buttonClick}
+							disabled={searchedItem.length === 0}
+						>
+							Clear
+						</button>
+					</form>
+					<ul>
+						{!filteredItems.length ? (
+							<p>It's not here!</p>
+						) : (
+							filteredItems.map((list) => {
+								return <ListItem name={list.name} key={list.id} />;
+							})
+						)}
+					</ul>
+				</div>
+			)}
 		</>
 	);
 }
