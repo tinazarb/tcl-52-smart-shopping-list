@@ -4,7 +4,7 @@ import { updateItem } from '../api';
 
 export function ListItem({ name, data, listToken }) {
 	const initialChecked =
-		Date.now() - data.dateLastPurchased.toMillis() < 86400000;
+		Date.now() - data.dateLastPurchased?.toMillis() < 86400000 || false;
 
 	const [isChecked, setIsChecked] = useState(initialChecked);
 
