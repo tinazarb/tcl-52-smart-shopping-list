@@ -1,6 +1,6 @@
 import { ListItem } from '../components';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 export function List({ data }) {
 	//set state
@@ -18,12 +18,6 @@ export function List({ data }) {
 		setSearchedItem('');
 	}
 
-	const navigate = useNavigate();
-
-	function handleNavigate(e) {
-		navigate('/add-item');
-	}
-
 	return (
 		<>
 			{/* welcome people to add to their list if it's empty */}
@@ -34,9 +28,7 @@ export function List({ data }) {
 						You have nothing on your list yet! Click here to add your first
 						item:
 					</h2>
-					<button onClick={handleNavigate} type="button">
-						Add item page
-					</button>
+					<NavLink to="/add-item">Add item page</NavLink>
 				</div>
 			) : (
 				// otherwise show people their list
@@ -47,7 +39,7 @@ export function List({ data }) {
 						<input
 							id="filter"
 							type="text"
-							inputmode="search"
+							inputMode="search"
 							value={searchedItem}
 							onChange={handleChange}
 							placeholder="Start Typing here..."
