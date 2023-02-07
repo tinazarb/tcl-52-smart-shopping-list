@@ -1,5 +1,6 @@
 import { ListItem } from '../components';
 import { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 
 export function List({ data, listToken }) {
 	//set state
@@ -19,43 +20,49 @@ export function List({ data, listToken }) {
 
 	return (
 		<>
-			<p>
-				Hello from the <code>/list</code> page!
-			</p>
-			<form>
-				<label htmlFor="filter">Filter Items:</label>
-				<input
-					id="filter"
-					type="text"
-					inputMode="search"
-					value={searchedItem}
-					onChange={handleChange}
-					placeholder="Start Typing here..."
-				/>
-				<button
-					type="button"
-					onClick={buttonClick}
-					disabled={searchedItem.length === 0}
-				>
-					Clear
-				</button>
-			</form>
-			<ul>
-				{!filteredItems.length ? (
-					<p>It's not here!</p>
-				) : (
-					filteredItems.map((list) => {
-						return (
-							<ListItem
-								name={list.name}
-								key={list.id}
-								data={list}
-								listToken={listToken}
-							/>
-						);
-					})
-				)}
-			</ul>
+			{/* welcome people to add to their list if it's empty */}
+			{data.length === 0 ? (
+				<div>
+					<h1>Hello!</h1>
+					<h2>
+						You have nothing on your list yet! Click here to add your first
+						item:
+					</h2>
+					<NavLink to="/add-item">Add item page</NavLink>
+				</div>
+			) : (
+				// otherwise show people their list
+				<div>
+					<h1>Welcome back!</h1>
+					<form>
+						<label htmlFor="filter">Filter Items:</label>
+						<input
+							id="filter"
+							type="text"
+							inputMode="search"
+							value={searchedItem}
+							onChange={handleChange}
+							placeholder="Start Typing here..."
+						/>
+						<button
+							type="button"
+							onClick={buttonClick}
+							disabled={searchedItem.length === 0}
+						>
+							Clear
+						</button>
+					</form>
+					<ul>
+						{!filteredItems.length ? (
+							<p>It's not here!</p>
+						) : (
+							filteredItems.map((list) => {
+								return <ListItem name={list.name} key={list.id} />;
+							})
+						)}
+					</ul>
+				</div>
+			)}
 		</>
 	);
 }
