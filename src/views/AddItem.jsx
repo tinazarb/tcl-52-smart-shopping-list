@@ -40,7 +40,11 @@ export function AddItem({ listToken, data }) {
 
 		// Validation check if new list item already exists in DB, alert if already exists
 		for (let i = 0; i < existingItems.length; i++) {
-			if (itemName.replace(/\s+/g, '').toLowerCase() === existingItems[i]) {
+			if (
+				itemName
+					.replace(/\s+|[~`!@#$%^&*(){}\[\];:"'<,.>?\/\\|_+=-]/g, '')
+					.toLowerCase() === existingItems[i]
+			) {
 				alert(`${itemName} already exists in your list`);
 				setItemName('');
 				return;
