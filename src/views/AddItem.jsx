@@ -29,10 +29,10 @@ export function AddItem({ listToken }) {
 	const submitForm = (e) => {
 		e.preventDefault();
 		//if they don't put anything in
-		if (itemName === '') {
-			setSubmissionYes('The item name cannot be blank :|');
-			return;
-		}
+		// if (itemName === '') {
+		// 	setSubmissionYes('The item name cannot be blank :|');
+		// 	return;
+		// }
 
 		//define itemData
 		let itemData = {
@@ -63,6 +63,7 @@ export function AddItem({ listToken }) {
 							name="itemName"
 							value={itemName}
 							onChange={handleChangeItem}
+							required
 						/>
 					</label>
 				</div>
