@@ -2,7 +2,7 @@ import { ListItem } from '../components';
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
-export function List({ data }) {
+export function List({ data, listToken }) {
 	//set state
 	const [searchedItem, setSearchedItem] = useState('');
 	//filtering items searched
