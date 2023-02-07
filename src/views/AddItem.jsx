@@ -6,7 +6,6 @@ import { useState } from 'react';
 export function AddItem({ listToken, data }) {
 	//itemName behaviour
 	const [itemName, setItemName] = useState('');
-	console.log(data);
 
 	const handleChangeItem = (e) => {
 		e.preventDefault();
@@ -32,15 +31,10 @@ export function AddItem({ listToken, data }) {
 
 	const submitForm = (e) => {
 		e.preventDefault();
-		//if they don't put anything in
-		// if (itemName === '') {
-		// 	setSubmissionYes('The item name cannot be blank :|');
-		// 	return;
-		// }
 
 		// Checking if new list item already exists in DB, alert if already exists
 		for (let i = 0; i < existingItems.length; i++) {
-			if (itemName.toLowerCase() === existingItems[i]) {
+			if (itemName.replace(/\s+/g, '').toLowerCase() === existingItems[i]) {
 				alert(`${itemName} already exists in your list`);
 				setItemName('');
 				return;
