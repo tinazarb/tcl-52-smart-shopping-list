@@ -32,7 +32,13 @@ export function AddItem({ listToken, data }) {
 	const submitForm = (e) => {
 		e.preventDefault();
 
-		// Checking if new list item already exists in DB, alert if already exists
+		// Validation check if item name field is empty on submit, alert if blank
+		if (!itemName) {
+			alert('Please enter a list item');
+			return;
+		}
+
+		// Validation check if new list item already exists in DB, alert if already exists
 		for (let i = 0; i < existingItems.length; i++) {
 			if (itemName.replace(/\s+/g, '').toLowerCase() === existingItems[i]) {
 				alert(`${itemName} already exists in your list`);
@@ -71,7 +77,6 @@ export function AddItem({ listToken, data }) {
 							name="itemName"
 							value={itemName}
 							onChange={handleChangeItem}
-							required
 						/>
 					</label>
 				</div>
