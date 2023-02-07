@@ -1,6 +1,7 @@
 import './ListItem.css';
 import { useState } from 'react';
 import { updateItem } from '../api';
+import { getDaysBetweenDates } from '../utils';
 
 export function ListItem({ name, data, listToken }) {
 	const initialChecked =
@@ -17,6 +18,7 @@ export function ListItem({ name, data, listToken }) {
 			const nextData = {
 				dateLastPurchased: new Date(),
 				totalPurchases: data.totalPurchases + 1,
+				// dateNextPurchased: new Date() + getDaysBetweenDates
 			};
 
 			updateItem(listToken, data.id, nextData);
