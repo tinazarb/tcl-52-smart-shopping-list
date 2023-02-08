@@ -23,6 +23,18 @@ export function ListItem({ name, data, listToken }) {
 
 			updateItem(listToken, data.id, nextData);
 		}
+
+		const today = new Date();
+
+		// if the item hasn't been purchased, compare today to the date of its creation else compare today to the day it was last purchased.
+		const delta =
+			data.dateLastPurchased === null
+				? getDaysBetweenDates(today.getTime(), data.dateCreated.toMillis())
+				: getDaysBetweenDates(
+						today.getTime(),
+						data.dateLastPurchased.toMillis(),
+				  );
+		console.log(delta);
 	};
 
 	return (
