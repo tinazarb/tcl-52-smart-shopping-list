@@ -12,10 +12,7 @@ export function getFutureDate(offset) {
 }
 
 export function getDaysBetweenDates(newerPurchase, olderPurchase) {
-	const newerPurchaseMilliseconds = newerPurchase.toDate().getTime();
-	const olderPurchaseMilliseconds = olderPurchase.toDate().getTime();
-
-	const timeBetween = newerPurchaseMilliseconds - olderPurchaseMilliseconds;
+	const timeBetween = newerPurchase - olderPurchase;
 	const daysBetween = Math.floor(timeBetween / ONE_DAY_IN_MILLISECONDS);
 
 	return daysBetween;
