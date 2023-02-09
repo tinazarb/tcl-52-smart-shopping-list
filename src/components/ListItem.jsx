@@ -43,13 +43,14 @@ export function ListItem({ name, data, listToken }) {
 function createNextData(data) {
 	const today = new Date();
 	const ONE_DAY_IN_MILLISECONDS = 86400000;
-	// if the item hasn't been purchased, compare today to the date of its creation, else compare today to the day it was last purchased.
+
+	// if the item hasn't been purchased: compare today to the date of its creation, else: compare today to the day it was last purchased
 	const timeSinceLastPurchase =
 		data.dateLastPurchased === null
 			? getDaysBetweenDates(today.getTime(), data.dateCreated.toMillis())
 			: getDaysBetweenDates(today.getTime(), data.dateLastPurchased.toMillis());
 
-	//interval last time
+	//if the item hasn't been purchased yet: compare its next purchase date to the date of its creation, else: compare its next purchase date to the date it was last purchased
 	const lastEstimatedInterval =
 		data.dateLastPurchased === null
 			? getDaysBetweenDates(
