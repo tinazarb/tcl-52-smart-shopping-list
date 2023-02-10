@@ -34,12 +34,12 @@ export function AddItem({ listToken, data }) {
 	const [formError, setFormError] = useState({});
 
 	// Validate Form
-
 	const collectFormErrors = () => {
+		// error object
 		let errorCollection = {};
 
-		// Validation check if item name field is empty on submit, error if blank
-		// Validation check if new list item already exists in DB, error if already exists
+		// Validation check if item name field is empty on submit -> inline error if blank
+		// Validation check if new list item already exists in DB -> inline error if item already exists
 		for (let i = 0; i < existingItems.length; i++) {
 			if (itemName === '') {
 				errorCollection.itemName = 'Please enter a list item';
@@ -52,16 +52,17 @@ export function AddItem({ listToken, data }) {
 			}
 		}
 
-		// return true/false based on if an error exists
+		// return error object containing error
 		return errorCollection;
 	};
 
 	const submitForm = async (e) => {
 		e.preventDefault();
+		// Check if form has an input field error -> error exists if object key exists in errorCollection object
 		const errorCollection = collectFormErrors();
-
 		const hasErrors = Object.keys(errorCollection).length > 0;
 
+		// If a client side error exists, set error object to state
 		if (hasErrors) {
 			return setFormError(errorCollection);
 		}
@@ -71,10 +72,15 @@ export function AddItem({ listToken, data }) {
 			itemName: itemName,
 			daysUntilNextPurchase: Number(nextPurchase),
 		};
-		await addItem(listToken, itemData);
-		setItemName('');
-		setNextPurchase(soon);
-		setSubmissionYes(`${itemName} is on your list :D`);
+		// try catch block to capture any network / server related errors
+		try {
+			await addItem(listToken, itemData);
+			setItemName('');
+			setNextPurchase(soon);
+			setSubmissionYes(`${itemName} is on your list :D`);
+		} catch (err) {
+			setSubmissionYes('Please try again, something went wrong :D');
+		}
 	};
 
 	return (
@@ -89,7 +95,7 @@ export function AddItem({ listToken, data }) {
 						value={itemName}
 						onChange={handleChangeItem}
 					/>
-					<div className="error">{formError.itemName}</div>
+					<div className="error-message">{formError.itemName}</div>
 				</div>
 				<div>
 					<fieldset>
