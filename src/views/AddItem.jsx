@@ -58,27 +58,23 @@ export function AddItem({ listToken, data }) {
 
 	const submitForm = async (e) => {
 		e.preventDefault();
-		let errorCollection = collectFormErrors();
+		const errorCollection = collectFormErrors();
 
-		let hasErrors = Object.keys(errorCollection).length > 0;
+		const hasErrors = Object.keys(errorCollection).length > 0;
 
-		//define itemData
-		let itemData = {
+		if (hasErrors) {
+			return setFormError(errorCollection);
+		}
+
+		//add item
+		const itemData = {
 			itemName: itemName,
 			daysUntilNextPurchase: Number(nextPurchase),
 		};
-
-		//add item
-		if (hasErrors) {
-			setFormError(errorCollection);
-		} else if (!hasErrors) {
-			await addItem(listToken, itemData);
-			setItemName('');
-			setNextPurchase(soon);
-			setSubmissionYes(`${itemName} is on your list :D`);
-		} else {
-			setSubmissionYes('Something went wrong, please try again :D');
-		}
+		await addItem(listToken, itemData);
+		setItemName('');
+		setNextPurchase(soon);
+		setSubmissionYes(`${itemName} is on your list :D`);
 	};
 
 	return (
