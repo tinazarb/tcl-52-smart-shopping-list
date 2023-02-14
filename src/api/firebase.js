@@ -9,6 +9,7 @@ import {
 	updateDoc,
 } from 'firebase/firestore';
 import { getFutureDate } from '../utils';
+import { getDaysBetweenDates } from '../utils';
 
 /**
  * Subscribe to changes on a specific list in the Firestore database (listId), and run a callback (handleSuccess) every time a change happens.
@@ -35,7 +36,7 @@ export function getItemData(snapshot) {
 	 * document references. We use `.map()` to iterate over them.
 	 * @see https://firebase.google.com/docs/reference/js/firestore_.documentsnapshot
 	 */
-	return snapshot.docs.map((docRef) => {
+	let result = snapshot.docs.map((docRef) => {
 		/**
 		 * We call the `.data()` method to get the data
 		 * out of the referenced document
@@ -47,9 +48,13 @@ export function getItemData(snapshot) {
 		 * so we get it from the document reference.
 		 */
 		data.id = docRef.id;
-
 		return data;
 	});
+
+	// Process it through our comparePurchaseUrgency function
+	comparePurchaseUrgency(result);
+
+	return result;
 }
 
 /**
@@ -75,6 +80,29 @@ export async function addItem(listId, { itemName, daysUntilNextPurchase }) {
 export async function updateItem(listId, itemId, nextData) {
 	const itemRef = doc(db, listId, itemId);
 	return await updateDoc(itemRef, nextData);
+}
+
+const urgencyFlag = (daysBetween) => {
+	if (daysBetween >= 60) {
+		return 'inactive';
+	} else if (daysBetween >= 30) {
+		return 'soon';
+	} else if (daysBetween >= 7) {
+		return 'kind-of-soon';
+	} else {
+		return '';
+	}
+};
+
+export async function comparePurchaseUrgency(itemList) {
+	itemList.forEach((item) => {
+		let daysBetween = getDaysBetweenDates(item.dateLastPurchased, new Date());
+		item.urgency = urgencyFlag(daysBetween);
+	});
+
+	itemList.sort((a, b) => {
+		return a.dateLastPurchased - b.dateLastPurchased;
+	});
 }
 
 export async function deleteItem() {
