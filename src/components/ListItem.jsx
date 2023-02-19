@@ -24,8 +24,6 @@ export function ListItem({ name, data, listToken }) {
 	function handleDeleteItem() {
 		if (window.confirm(`Are you sure you wish to delete ${name}?`)) {
 			deleteItem(listToken, data.id);
-		} else {
-			this.onCancel();
 		}
 	}
 
