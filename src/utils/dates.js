@@ -30,9 +30,9 @@ export function secondsToDate(seconds) {
 
 export function getDaysBetweenDates(
 	newerPurchaseInMilliseconds,
-	olderPurchaseinMilliseconds,
+	olderPurchaseInMilliseconds,
 ) {
-	const timeBetween = newerPurchaseInMilliseconds - olderPurchaseinMilliseconds;
+	const timeBetween = newerPurchaseInMilliseconds - olderPurchaseInMilliseconds;
 	const daysBetween = Math.floor(timeBetween / ONE_DAY_IN_MILLISECONDS);
 
 	return daysBetween;
