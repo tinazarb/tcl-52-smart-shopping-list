@@ -82,6 +82,7 @@ export async function updateItem(listId, itemId, nextData) {
 	return await updateDoc(itemRef, nextData);
 }
 
+//create an urgency flag for sorting the list
 const urgencyFlag = (daysBetween) => {
 	if (daysBetween >= 30) {
 		return 'Not Soon';
@@ -95,10 +96,9 @@ const urgencyFlag = (daysBetween) => {
 	return '';
 };
 
+//assign the appropriate urgency flag to each item
 export async function comparePurchaseUrgency(itemList) {
 	itemList.forEach((item) => {
-		console.log(item);
-
 		if (item.dateNextPurchased != null) {
 			let daysBetween = getDaysBetweenDates(
 				item.dateNextPurchased.toDate().getTime(),
@@ -107,7 +107,7 @@ export async function comparePurchaseUrgency(itemList) {
 			item.urgency = urgencyFlag(daysBetween);
 		}
 
-		// If the item has never been purchased, check if it's been 60 days since it was created and say it's inactive.
+		// If the item has never been purchased, check if it's been 60 days since it was created and say it's inactive
 		if (item.dateLastPurchased != null) {
 			if (
 				getDaysBetweenDates(
@@ -115,7 +115,7 @@ export async function comparePurchaseUrgency(itemList) {
 					item.dateLastPurchased.toDate().getTime(),
 				) >= 60
 			) {
-				item.urgency = 'inactive';
+				item.urgency = 'Inactive';
 			}
 		}
 	});
