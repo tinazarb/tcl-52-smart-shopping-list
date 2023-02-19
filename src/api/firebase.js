@@ -83,25 +83,67 @@ export async function updateItem(listId, itemId, nextData) {
 }
 
 const urgencyFlag = (daysBetween) => {
-	if (daysBetween >= 60) {
-		return 'inactive';
-	} else if (daysBetween >= 30) {
-		return 'soon';
+	if (daysBetween >= 30) {
+		return 'Not Soon';
 	} else if (daysBetween >= 7) {
-		return 'kind-of-soon';
-	} else {
-		return '';
+		return 'Kind of Soon';
+	} else if (daysBetween >= 0) {
+		return 'Soon';
+	} else if (daysBetween <= -1) {
+		return 'Overdue';
 	}
+	return '';
 };
 
 export async function comparePurchaseUrgency(itemList) {
 	itemList.forEach((item) => {
-		let daysBetween = getDaysBetweenDates(item.dateLastPurchased, new Date());
-		item.urgency = urgencyFlag(daysBetween);
+		console.log(item);
+
+		if (item.dateNextPurchased != null) {
+			let daysBetween = getDaysBetweenDates(
+				item.dateNextPurchased.toDate().getTime(),
+				new Date().getTime(),
+			);
+			item.urgency = urgencyFlag(daysBetween);
+		}
+
+		// If the item has never been purchased, check if it's been 60 days since it was created and say it's inactive.
+		if (item.dateLastPurchased != null) {
+			if (
+				getDaysBetweenDates(
+					new Date().getTime(),
+					item.dateLastPurchased.toDate().getTime(),
+				) >= 60
+			) {
+				item.urgency = 'inactive';
+			}
+		}
 	});
 
 	itemList.sort((a, b) => {
-		return a.dateLastPurchased - b.dateLastPurchased;
+		return a.dateNextPurchased - b.dateNextPurchased;
+	});
+
+	// Sort items with same day alphabetically:
+	itemList.sort((a, b) => {
+		if (
+			a.dateNextPurchased.toDate().getDay() ===
+			b.dateNextPurchased.toDate().getDay()
+		) {
+			return a.name.localeCompare(b.name);
+		}
+		return a.dateNextPurchased - b.dateNextPurchased;
+	});
+
+	// Place items with inactive urgency at the end of the list
+	itemList.sort((a, b) => {
+		if (a.urgency === 'inactive') {
+			return 1;
+		} else if (b.urgency === 'inactive') {
+			return -1;
+		} else {
+			return 0;
+		}
 	});
 }
 

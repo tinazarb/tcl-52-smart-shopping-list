@@ -35,7 +35,7 @@ export function ListItem({ name, data, listToken }) {
 				<label htmlFor="listItem" className="ListItem-label">
 					{name}
 				</label>
-				<b>{data.urgency}</b>
+				<label className="ListItem-urgency">{data.urgency}</label>
 			</li>
 		</>
 	);

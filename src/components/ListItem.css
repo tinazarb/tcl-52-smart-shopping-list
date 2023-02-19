@@ -1,5 +1,5 @@
 .ListItem {
-	align-items: baseline;
+	align-items: center;
 	display: flex;
 	flex-direction: row;
 	font-size: 1.2em;
@@ -11,4 +11,8 @@
 
 .ListItem-label {
 	margin-left: 0.2em;
+}
+
+.ListItem-urgency {
+	margin-left: auto;
 }
