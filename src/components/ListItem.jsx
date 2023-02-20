@@ -41,8 +41,7 @@ export function ListItem({ name, data, listToken }) {
 				<label htmlFor="listItem" className="ListItem-label">
 					{name}
 				</label>
-				<button type="submit" onClick={handleDeleteItem}>
-					{' '}
+				<button type="button" onClick={handleDeleteItem}>
 					Delete
 				</button>
 			</li>
