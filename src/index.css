@@ -1,16 +1,20 @@
 :root {
-	--color-black: #3596a7;
-	--color-gray-dark: hsla(220, 13%, 25%, 1);
+	--color-black: hsla(220, 13%, 18%, 1);
+	--color-black-brown: #322a20;
 	--color-white: hsla(220, 13%, 98%, 1);
-	--color-gray-light: hsla(220, 13%, 94%, 1);
+	--color-gray-dark: hsla(220, 13%, 25%, 1);
+	--color-gray-light: rgb(142, 142, 143);
 	--color-emerald-green: hsla(168, 92%, 25%, 1);
+	--color-light-green: #2e7a7a;
 	--color-vermillion-green: hsla(168, 92%, 43%, 1);
 	--color-cobalt-blue: hsla(215, 100%, 34%, 1);
+	--color-dark-blue: #355da7;
+	--color-aqua-blue: #3596a7;
 	--color-pastel-blue: hsla(215, 100%, 73%, 1);
 	--color-red: hsl(0, 68%, 42%);
 
-	--color-accent: var(--color-pastel-blue);
-	--color-bg: var(--color-black);
+	--color-accent: var(--color-white);
+	--color-bg: var(--color-aqua-blue);
 	--color-bg-well: var(--color-gray-dark);
 	--color-error: var(--color-red);
 	--color-text: var(--color-white);
@@ -21,7 +25,7 @@
 		--color-accent: var(--color-cobalt-blue);
 		--color-bg: var(--color-white);
 		--color-bg-well: var(--color-gray-light);
-		--color-text: var(--color-black);
+		--color-text: var(--color-aqua-blue);
 	}
 }
 
@@ -29,7 +33,7 @@
 	--color-accent: var(--color-cobalt-blue);
 	--color-bg: var(--color-white);
 	--color-bg-well: var(--color-gray-light);
-	--color-text: var(--color-black);
+	--color-text: var(--color-aqua-blue);
 }
 
 *,
@@ -66,7 +70,7 @@ body {
 }
 
 code {
-	--color-bg: var(--color-gray-dark);
+	--color-bg: var(--color-gray-light);
 	--color-text: var(--color-accent);
 
 	background-color: var(--color-bg);
@@ -92,3 +96,21 @@ code {
 ul {
 	padding: 0;
 }
+
+button {
+	background-color: var(--color-dark-blue);
+	color: var(--color-white);
+	padding: 0.4em 0.6em;
+	margin: 0.3em;
+	border-radius: 6px;
+	border: 0.1em solid var(--color-dark-blue);
+}
+
+button:hover {
+	background-color: var(--color-black-brown);
+	border: 0.1em solid var(--color-black-brown);
+}
+
+/* button:disabled {
+	opacity: 0.5;
+} */
