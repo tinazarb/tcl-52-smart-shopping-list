@@ -1,6 +1,6 @@
 import './ListItem.css';
 import { useState } from 'react';
-import { updateItem } from '../api';
+import { updateItem, deleteItem } from '../api';
 import { getDaysBetweenDates } from '../utils';
 import { calculateEstimate } from '@the-collab-lab/shopping-list-utils';
 
@@ -21,6 +21,12 @@ export function ListItem({ name, data, listToken }) {
 		}
 	};
 
+	function handleDeleteItem() {
+		if (window.confirm(`Are you sure you wish to delete ${name}?`)) {
+			deleteItem(listToken, data.id);
+		}
+	}
+
 	return (
 		<>
 			<li className="ListItem">
@@ -36,6 +42,9 @@ export function ListItem({ name, data, listToken }) {
 					{name}
 				</label>
 				<label className="ListItem-urgency">{data.urgency}</label>
+				<button type="button" onClick={handleDeleteItem}>
+					Delete
+				</button>
 			</li>
 		</>
 	);
