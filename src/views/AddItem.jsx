@@ -100,34 +100,40 @@ export function AddItem({ listToken, data }) {
 				<div>
 					<fieldset>
 						<legend>How soon will you buy this again?</legend>
-						<input
-							type="radio"
-							id="soon"
-							name="buyAgain"
-							value={soon}
-							checked={nextPurchase === soon}
-							onChange={handleChange}
-						/>
-						<label htmlFor="soon">Soon</label>
-						<input
-							type="radio"
-							id="kindOfSoon"
-							name="buyAgain"
-							value={kindOfSoon}
-							checked={nextPurchase === kindOfSoon}
-							onChange={handleChange}
-							required="required"
-						/>
-						<label htmlFor="kindOfSoon">Kind Of Soon</label>
-						<input
-							type="radio"
-							id="notSoon"
-							name="buyAgain"
-							value={notSoon}
-							checked={nextPurchase === notSoon}
-							onChange={handleChange}
-						/>
-						<label htmlFor="notSoon">Not Soon</label>
+						<div>
+							<input
+								type="radio"
+								id="soon"
+								name="buyAgain"
+								value={soon}
+								checked={nextPurchase === soon}
+								onChange={handleChange}
+							/>
+							<label htmlFor="soon">Soon</label>
+						</div>
+						<div>
+							<input
+								type="radio"
+								id="kindOfSoon"
+								name="buyAgain"
+								value={kindOfSoon}
+								checked={nextPurchase === kindOfSoon}
+								onChange={handleChange}
+								required="required"
+							/>
+							<label htmlFor="kindOfSoon">Kind Of Soon</label>
+						</div>
+						<div>
+							<input
+								type="radio"
+								id="notSoon"
+								name="buyAgain"
+								value={notSoon}
+								checked={nextPurchase === notSoon}
+								onChange={handleChange}
+							/>
+							<label htmlFor="notSoon">Not Soon</label>
+						</div>
 					</fieldset>
 				</div>
 				<button type="submit">Add Item</button>
