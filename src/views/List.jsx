@@ -48,6 +48,7 @@ export function List({ data, listToken }) {
 							type="button"
 							onClick={buttonClick}
 							disabled={searchedItem.length === 0}
+							className="clearButton"
 						>
 							Clear
 						</button>

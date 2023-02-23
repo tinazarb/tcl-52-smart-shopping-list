@@ -109,8 +109,12 @@ button {
 button:hover {
 	background-color: var(--color-black-brown);
 	border: 0.1em solid var(--color-black-brown);
+	cursor: pointer;
 }
 
-/* button:disabled {
+.clearButton:disabled {
 	opacity: 0.5;
-} */
+	background-color: var(--color-dark-blue);
+	border: 0.1em solid var(--color-dark-blue);
+	cursor: auto;
+}
