@@ -41,6 +41,7 @@ export function ListItem({ name, data, listToken }) {
 				<label htmlFor="listItem" className="ListItem-label">
 					{name}
 				</label>
+				<label className="ListItem-urgency">{data.urgency}</label>
 				<button type="button" onClick={handleDeleteItem}>
 					Delete
 				</button>

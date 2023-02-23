@@ -53,6 +53,7 @@ export function List({ data, listToken }) {
 						</button>
 					</form>
 					<ul>
+						{/* sort items by urgency */}
 						{!filteredItems.length ? (
 							<p>It's not here!</p>
 						) : (
