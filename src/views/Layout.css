@@ -54,9 +54,20 @@
 	padding: 0.8rem;
 	text-align: center;
 	text-underline-offset: 0.1em;
+	display: table-cell;
+	vertical-align: middle;
 }
 
 .Nav-link.active {
 	text-decoration-thickness: 0.22em;
 	text-underline-offset: 0.1em;
+}
+
+.buttonContainer {
+	display: table;
+	width: 100%;
+}
+
+.buttonContainer .Nav-link span {
+	display: block;
 }
