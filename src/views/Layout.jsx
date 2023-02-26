@@ -1,5 +1,8 @@
 import { Outlet } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faListDots } from '@fortawesome/free-solid-svg-icons';
+import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 
 import './Layout.css';
 
@@ -22,15 +25,18 @@ export function Layout() {
 					<Outlet />
 				</main>
 				<nav className="Nav">
-					<NavLink to="/" className="Nav-link">
-						Home
-					</NavLink>
-					<NavLink to="/list" className="Nav-link">
-						List
-					</NavLink>
-					<NavLink to="add-item" className="Nav-link">
-						Add Item
-					</NavLink>
+					<div className="ListButton">
+						<NavLink to="/list" className="Nav-link">
+							<FontAwesomeIcon icon={faListDots} />
+							List
+						</NavLink>
+					</div>
+					<div className="AddButton">
+						<NavLink to="add-item" className="Nav-link">
+							<FontAwesomeIcon icon={faCartPlus} />
+							Add Item
+						</NavLink>
+					</div>
 				</nav>
 			</div>
 		</>
