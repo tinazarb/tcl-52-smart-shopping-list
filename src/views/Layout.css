@@ -71,3 +71,11 @@
 .buttonContainer .Nav-link span {
 	display: block;
 }
+
+.leftNav {
+	border-right: 1.5px solid white;
+}
+
+.rightNav {
+	border-left: 1.5px solid white;
+}

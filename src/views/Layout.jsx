@@ -25,13 +25,13 @@ export function Layout() {
 					<Outlet />
 				</main>
 				<nav className="Nav">
-					<div className="buttonContainer">
+					<div className="buttonContainer leftNav">
 						<NavLink to="/list" className="Nav-link">
 							<FontAwesomeIcon icon={faListDots} />
 							<span>List</span>
 						</NavLink>
 					</div>
-					<div className="buttonContainer">
+					<div className="buttonContainer rightNav">
 						<NavLink to="add-item" className="Nav-link">
 							<FontAwesomeIcon icon={faCartPlus} />
 							<span>Add Item</span>
