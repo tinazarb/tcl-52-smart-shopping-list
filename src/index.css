@@ -125,3 +125,7 @@ fieldset {
 	border: none;
 	margin-top: 1em;
 }
+
+a {
+	color: var(--color-white);
+}
