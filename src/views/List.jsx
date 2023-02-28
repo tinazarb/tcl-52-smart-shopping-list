@@ -18,6 +18,8 @@ export function List({ data, listToken }) {
 		setSearchedItem('');
 	}
 
+	const currentList = listToken;
+
 	return (
 		<>
 			{/* welcome people to add to their list if it's empty */}
@@ -33,9 +35,10 @@ export function List({ data, listToken }) {
 					</NavLink>
 				</div>
 			) : (
-				// otherwise show people their list
+				// otherwise show people their by collection name
 				<div>
-					<h1>Welcome back!</h1>
+					<h1>Welcome back to your list!</h1>
+					<h2>Your secret token is: {currentList}</h2>
 					<form>
 						<label htmlFor="filter">Filter Items:</label>
 						<input
