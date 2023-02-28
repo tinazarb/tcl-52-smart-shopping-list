@@ -3,7 +3,7 @@
 	--color-black-brown: hsla(33, 22%, 16%, 1);
 	--color-white: hsla(220, 13%, 98%, 1);
 	--color-gray-dark: hsla(220, 13%, 25%, 1);
-	--color-gray-light: hsla(0, 0%, 45%, 1);
+	--color-gray-light: hsla(0, 0%, 77%, 1);
 	--color-emerald-green: hsla(168, 92%, 25%, 1);
 	--color-light-green: hsla(180, 45%, 33%, 1);
 	--color-vermillion-green: hsla(168, 92%, 43%, 1);
@@ -72,7 +72,7 @@ body {
 }
 
 code {
-	--color-bg: var(--color-gray-light);
+	--color-bg: var(--color-gray-dark);
 	--color-text: var(--color-accent);
 
 	background-color: var(--color-bg);
@@ -126,6 +126,9 @@ fieldset {
 	margin-top: 1em;
 }
 
-a {
-	color: var(--color-white);
+.link {
+	background-color: var(--color-white);
+	border: 1px var(--color-white);
+	padding: 0.3em;
+	border-radius: 6px;
 }

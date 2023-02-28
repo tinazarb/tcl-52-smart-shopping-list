@@ -28,7 +28,9 @@ export function List({ data, listToken }) {
 						You have nothing on your list yet! Click here to add your first
 						item:
 					</h2>
-					<NavLink to="/add-item">Add item page</NavLink>
+					<NavLink className="link" to="/add-item">
+						Add item page
+					</NavLink>
 				</div>
 			) : (
 				// otherwise show people their list
