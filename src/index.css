@@ -3,13 +3,13 @@
 	--color-black-brown: hsla(33, 22%, 16%, 1);
 	--color-white: hsla(220, 13%, 98%, 1);
 	--color-gray-dark: hsla(220, 13%, 25%, 1);
-	--color-gray-light: rgb(142, 142, 143);
+	--color-gray-light: hsla(0, 0%, 45%, 1);
 	--color-emerald-green: hsla(168, 92%, 25%, 1);
 	--color-light-green: hsla(180, 45%, 33%, 1);
 	--color-vermillion-green: hsla(168, 92%, 43%, 1);
 	--color-cobalt-blue: hsla(215, 100%, 34%, 1);
 	--color-dark-blue: hsla(219, 52%, 43%, 1);
-	--color-aqua-blue: hsla(189, 52%, 43%, 1);
+	--color-aqua-blue: hsla(189, 52%, 36%, 1);
 	--color-pastel-blue: hsla(215, 100%, 73%, 1);
 	--color-red: hsl(0, 68%, 42%);
 
