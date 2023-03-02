@@ -2,7 +2,7 @@ import { ListItem } from '../components';
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
-export function List({ data, listToken }) {
+export function List({ data, listToken, tokenHistory }) {
 	//set state
 	const [searchedItem, setSearchedItem] = useState('');
 	//filtering items searched
@@ -39,6 +39,12 @@ export function List({ data, listToken }) {
 				<div>
 					<h1>Welcome back to your list!</h1>
 					<h2>Your secret token is: {currentList}</h2>
+					<span>Token History</span>
+					<ul>
+						{tokenHistory.map((token) => {
+							return <li key={token}>{token}</li>;
+						})}
+					</ul>
 					<form>
 						<label htmlFor="filter">Filter Items:</label>
 						<input
