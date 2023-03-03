@@ -1,7 +1,7 @@
 import './Home.css';
 import { useCallback, useState } from 'react';
 import { checkListToken } from '../api/firebase';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 export function Home({ handleNewToken, setListToken, listToken }) {
 	const [token, setToken] = useState('');
@@ -36,9 +36,7 @@ export function Home({ handleNewToken, setListToken, listToken }) {
 
 	return (
 		<div className="Home">
-			<p>
-				Hello from the home (<code>/</code>) page.
-			</p>
+			<NavLink to="/about">Learn how to use your smart shopping app</NavLink>
 			<button onClick={handleClick}>Create a new list!</button>
 			<p> Want to join an existing list? </p>
 			<form onSubmit={handleTokenSubmit}>
