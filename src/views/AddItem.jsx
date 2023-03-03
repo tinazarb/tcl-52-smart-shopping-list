@@ -109,7 +109,7 @@ export function AddItem({ listToken, data }) {
 								checked={nextPurchase === soon}
 								onChange={handleChange}
 							/>
-							<label htmlFor="soon">Soon</label>
+							<label htmlFor="soon">1 Week</label>
 						</div>
 						<div>
 							<input
@@ -121,7 +121,7 @@ export function AddItem({ listToken, data }) {
 								onChange={handleChange}
 								required="required"
 							/>
-							<label htmlFor="kindOfSoon">Kind Of Soon</label>
+							<label htmlFor="kindOfSoon">2 Weeks</label>
 						</div>
 						<div>
 							<input
@@ -132,7 +132,7 @@ export function AddItem({ listToken, data }) {
 								checked={nextPurchase === notSoon}
 								onChange={handleChange}
 							/>
-							<label htmlFor="notSoon">Not Soon</label>
+							<label htmlFor="notSoon">1 Month</label>
 						</div>
 					</fieldset>
 				</div>

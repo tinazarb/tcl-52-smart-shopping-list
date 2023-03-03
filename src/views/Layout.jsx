@@ -6,15 +6,7 @@ import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 
 import './Layout.css';
 
-/**
- * TODO: The links defined in this file don't work!
- *
- * Instead of anchor element, they should use a component
- * from `react-router-dom` to navigate to the routes
- * defined in `App.jsx`.
- */
-
-export function Layout() {
+export function Layout({ listToken }) {
 	return (
 		<>
 			<div className="Layout">
@@ -24,20 +16,24 @@ export function Layout() {
 				<main className="Layout-main">
 					<Outlet />
 				</main>
-				<nav className="Nav">
-					<div className="buttonContainer leftNav">
-						<NavLink to="/list" className="Nav-link">
-							<FontAwesomeIcon icon={faListDots} />
-							<span>List</span>
-						</NavLink>
-					</div>
-					<div className="buttonContainer rightNav">
-						<NavLink to="add-item" className="Nav-link">
-							<FontAwesomeIcon icon={faCartPlus} />
-							<span>Add Item</span>
-						</NavLink>
-					</div>
-				</nav>
+				{listToken ? (
+					<nav className="Nav">
+						<div className="buttonContainer leftNav">
+							<NavLink to="/list" className="Nav-link">
+								<FontAwesomeIcon icon={faListDots} />
+								<span>List</span>
+							</NavLink>
+						</div>
+						<div className="buttonContainer rightNav">
+							<NavLink to="add-item" className="Nav-link">
+								<FontAwesomeIcon icon={faCartPlus} />
+								<span>Add Item</span>
+							</NavLink>
+						</div>
+					</nav>
+				) : (
+					''
+				)}
 			</div>
 		</>
 	);

@@ -18,18 +18,19 @@ export function List({ data, listToken }) {
 		setSearchedItem('');
 	}
 
+	console.log(listToken);
+
 	return (
 		<>
 			{/* welcome people to add to their list if it's empty */}
 			{data.length === 0 ? (
 				<div>
-					<h1>Hello!</h1>
 					<h2>
-						You have nothing on your list yet! Click here to add your first
+						You have nothing on your list yet! Click below to add your first
 						item:
 					</h2>
 					<NavLink className="link" to="/add-item">
-						Add item page
+						Add Item
 					</NavLink>
 				</div>
 			) : (
