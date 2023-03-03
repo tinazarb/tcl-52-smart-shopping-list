@@ -19,7 +19,7 @@ export function Layout() {
 		<>
 			<div className="Layout">
 				<header className="Layout-header">
-					<h1>Smart shopping list</h1>
+					<h1>Smart Shopping List</h1>
 				</header>
 				<main className="Layout-main">
 					<Outlet />
