@@ -4,7 +4,16 @@ import { updateItem, deleteItem } from '../api';
 import { getDaysBetweenDates } from '../utils';
 import { calculateEstimate } from '@the-collab-lab/shopping-list-utils';
 
-export function ListItem({ name, data, listToken }) {
+import {
+	Checkbox,
+	List,
+	ListItem,
+	ListItemText,
+	IconButton,
+} from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+
+export function ListItems({ name, data, listToken }) {
 	const initialChecked =
 		Date.now() - data.dateLastPurchased?.toMillis() < 86400000 || false;
 
@@ -29,23 +38,24 @@ export function ListItem({ name, data, listToken }) {
 
 	return (
 		<>
-			<li className="ListItem">
-				<input
-					className="ListItem-checkbox"
-					type="checkbox"
-					id="listItem"
-					value={name}
-					checked={isChecked}
-					onChange={handleSelect}
-				/>
-				<label htmlFor="listItem" className="ListItem-label">
-					{name}
-				</label>
-				<label className="ListItem-urgency">{data.urgency}</label>
-				<button type="button" onClick={handleDeleteItem}>
-					Delete
-				</button>
-			</li>
+			<List dense>
+				<ListItem
+					secondaryAction={
+						<IconButton edge="end" aria-label="delete">
+							<DeleteIcon onClick={handleDeleteItem} />
+						</IconButton>
+					}
+				>
+					<Checkbox
+						className="ListItem-checkbox"
+						id="listItem"
+						checked={isChecked}
+						onChange={handleSelect}
+					/>
+					<ListItemText primary={name} />
+					<label className="ListItem-urgency">{data.urgency}</label>
+				</ListItem>
+			</List>
 		</>
 	);
 }

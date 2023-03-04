@@ -1,4 +1,4 @@
-import { ListItem } from '../components';
+import { ListItems } from '../components';
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
@@ -34,7 +34,7 @@ export function List({ data, listToken }) {
 			) : (
 				// otherwise show people their list
 				<div>
-					<h1>Welcome back!</h1>
+					{/* <h1>Welcome back!</h1> */}
 					<form>
 						<label htmlFor="filter">Filter Items:</label>
 						<input
@@ -61,7 +61,7 @@ export function List({ data, listToken }) {
 						) : (
 							filteredItems.map((list) => {
 								return (
-									<ListItem
+									<ListItems
 										name={list.name}
 										key={list.id}
 										data={list}

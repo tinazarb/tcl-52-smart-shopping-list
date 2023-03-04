@@ -1,5 +1,4 @@
 // TODO lower banner display that disappears on either next submission OR leaving the page
-import './AddItem.css';
 import { addItem } from '../api/firebase';
 import { useState } from 'react';
 
@@ -76,7 +75,7 @@ export function AddItem({ listToken, data }) {
 
 		// If a client side error exists, set error object to state
 		if (hasErrors) {
-			return setFormError(errorCollection), setIsFormInvalid(true);
+			return [setFormError(errorCollection), setIsFormInvalid(true)];
 		}
 
 		//add item
