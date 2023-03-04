@@ -1,3 +1,4 @@
+import './About.css';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
@@ -22,7 +23,9 @@ export function About() {
 				</li>
 			</ul>
 			<button>
-				<NavLink to="/">Return to home</NavLink>
+				<NavLink to="/" id="return-home">
+					Return to home
+				</NavLink>
 			</button>
 		</>
 	);
