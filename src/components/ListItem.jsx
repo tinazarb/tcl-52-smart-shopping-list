@@ -10,6 +10,7 @@ import {
 	ListItem,
 	ListItemText,
 	IconButton,
+	Typography,
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 
@@ -36,6 +37,16 @@ export function ListItems({ name, data, listToken }) {
 		}
 	}
 
+	const primaryTypographyProps = {
+		style: {
+			fontFamily:
+				"'Manrope', sans-serif, -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Ubuntu, roboto, noto, arial, sans-serif",
+			fontWeight: '600',
+			fontSize: '1.6rem',
+			lineHeight: '1.4',
+		},
+	};
+
 	return (
 		<>
 			<List dense>
@@ -56,7 +67,12 @@ export function ListItems({ name, data, listToken }) {
 						checked={isChecked}
 						onChange={handleSelect}
 					/>
-					<ListItemText primary={name} />
+					<ListItemText
+						primary={
+							<Typography {...primaryTypographyProps}>{name}</Typography>
+						}
+					/>
+
 					<label className="ListItem-urgency">{data.urgency}</label>
 				</ListItem>
 			</List>
