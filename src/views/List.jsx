@@ -1,3 +1,4 @@
+import './List.css';
 import { ListItems } from '../components';
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
@@ -35,42 +36,46 @@ export function List({ data, listToken }) {
 				// otherwise show people their list
 				<div>
 					{/* <h1>Welcome back!</h1> */}
-					<form>
-						<label htmlFor="filter">Filter Items:</label>
-						<input
-							id="filter"
-							type="text"
-							inputMode="search"
-							value={searchedItem}
-							onChange={handleChange}
-							placeholder="Start Typing here..."
-						/>
-						<button
-							type="button"
-							onClick={buttonClick}
-							disabled={searchedItem.length === 0}
-							className="clearButton"
-						>
-							Clear
-						</button>
-					</form>
-					<ul>
-						{/* sort items by urgency */}
-						{!filteredItems.length ? (
-							<p>It's not here!</p>
-						) : (
-							filteredItems.map((list) => {
-								return (
-									<ListItems
-										name={list.name}
-										key={list.id}
-										data={list}
-										listToken={listToken}
-									/>
-								);
-							})
-						)}
-					</ul>
+					<div className="search-container">
+						<form>
+							<label htmlFor="filter">Filter Items:</label>
+							<input
+								id="filter"
+								type="text"
+								inputMode="search"
+								value={searchedItem}
+								onChange={handleChange}
+								placeholder="Start Typing here..."
+							/>
+							<button
+								type="button"
+								onClick={buttonClick}
+								disabled={searchedItem.length === 0}
+								className="clearButton"
+							>
+								Clear
+							</button>
+						</form>
+					</div>
+					<div className="shopping-list">
+						<ul>
+							{/* sort items by urgency */}
+							{!filteredItems.length ? (
+								<p>It's not here!</p>
+							) : (
+								filteredItems.map((list) => {
+									return (
+										<ListItems
+											name={list.name}
+											key={list.id}
+											data={list}
+											listToken={listToken}
+										/>
+									);
+								})
+							)}
+						</ul>
+					</div>
 				</div>
 			)}
 		</>
