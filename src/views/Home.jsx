@@ -41,8 +41,8 @@ export function Home({ handleNewToken, setListToken, listToken }) {
 
 	return (
 		<div className="Home">
-			<h2>Welcome to your smart shopping list</h2>
-			<NavLink to="/about">Learn how to use your smart shopping app</NavLink>
+			<h2>Welcome to your Smart Shopping List</h2>
+			<NavLink to="/about">Learn how to use the Shopping List App</NavLink>
 			<div className="home-buttons">
 				<button onClick={handleCreateNewList}>Create New List</button>
 				<button onClick={handleJoinExistingList}>Join Existing List</button>

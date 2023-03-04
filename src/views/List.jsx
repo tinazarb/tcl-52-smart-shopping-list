@@ -61,7 +61,7 @@ export function List({ data, listToken }) {
 						<ul>
 							{/* sort items by urgency */}
 							{!filteredItems.length ? (
-								<p>It's not here!</p>
+								<p>{searchedItem} is not on your Shopping List</p>
 							) : (
 								filteredItems.map((list) => {
 									return (

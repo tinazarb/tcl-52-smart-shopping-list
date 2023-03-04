@@ -11,6 +11,7 @@ import {
 	RadioGroup,
 	Radio,
 	TextField,
+	Typography,
 } from '@mui/material';
 
 export function AddItem({ listToken, data }) {
@@ -94,18 +95,45 @@ export function AddItem({ listToken, data }) {
 		}
 	};
 
+	const primaryTypographyProps = {
+		style: {
+			fontFamily:
+				"'Manrope', sans-serif, -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Ubuntu, roboto, noto, arial, sans-serif",
+			fontWeight: '600',
+			fontSize: '1.6rem',
+			lineHeight: '1.4',
+			color: 'var(--color-aqua-blue)',
+			paddingTop: '.8rem',
+		},
+	};
+
+	const secondaryTypographyProps = {
+		style: {
+			fontFamily:
+				"'Manrope', sans-serif, -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Ubuntu, roboto, noto, arial, sans-serif",
+			fontWeight: '600',
+			fontSize: '1.3rem',
+			lineHeight: '1.4',
+			color: 'var(--color-aqua-blue)',
+		},
+	};
+
 	return (
 		<>
 			<Box
 				sx={{
 					width: '50rem',
-					height: '25rem',
+					height: '30rem',
 					border: '.05rem solid #2c7d8c',
 					padding: '2rem',
 				}}
 			>
 				<FormControl onSubmit={submitForm} component="form" fullWidth>
-					<FormLabel>Add Item to Shopping List</FormLabel>
+					<FormLabel>
+						<Typography {...primaryTypographyProps}>
+							Add Item to Shopping List
+						</Typography>
+					</FormLabel>
 					<TextField
 						id="addItemInput"
 						type="text"
@@ -118,11 +146,17 @@ export function AddItem({ listToken, data }) {
 						onChange={handleChangeItem}
 					/>
 					<div>
-						<FormLabel>How soon will you buy this again?</FormLabel>
+						<FormLabel>
+							<Typography {...primaryTypographyProps}>
+								How soon will you buy this again?
+							</Typography>
+						</FormLabel>
 						<RadioGroup defaultValue="soon" name="radio-buttons-group">
 							<FormControlLabel
 								id="soon"
-								label="1 Week"
+								label={
+									<Typography {...secondaryTypographyProps}>1 Week</Typography>
+								}
 								name="buyAgain"
 								control={<Radio />}
 								value={soon}
@@ -131,7 +165,9 @@ export function AddItem({ listToken, data }) {
 							/>
 							<FormControlLabel
 								id="kindOfSoon"
-								label="2 Weeks"
+								label={
+									<Typography {...secondaryTypographyProps}>2 Weeks</Typography>
+								}
 								name="buyAgain"
 								control={<Radio />}
 								value={kindOfSoon}
@@ -140,7 +176,9 @@ export function AddItem({ listToken, data }) {
 							/>
 							<FormControlLabel
 								id="notSoon"
-								label="1 Month"
+								label={
+									<Typography {...secondaryTypographyProps}>1 Month</Typography>
+								}
 								name="buyAgain"
 								control={<Radio />}
 								value={notSoon}
