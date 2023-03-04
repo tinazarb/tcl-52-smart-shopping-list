@@ -37,7 +37,7 @@
 .Nav {
 	align-items: stretch;
 	background-color: var(--color-bg);
-	border-top: 3px solid white;
+	border-top: 3px solid var(--color-accent);
 	bottom: 0;
 	display: flex;
 	flex-direction: row;
@@ -73,9 +73,9 @@
 }
 
 .leftNav {
-	border-right: 1.5px solid white;
+	border-right: 1.5px solid var(--color-accent);
 }
 
 .rightNav {
-	border-left: 1.5px solid white;
+	border-left: 1.5px solid var(--color-accent);
 }

@@ -18,8 +18,6 @@ export function List({ data, listToken }) {
 		setSearchedItem('');
 	}
 
-	console.log(listToken);
-
 	return (
 		<>
 			{/* welcome people to add to their list if it's empty */}

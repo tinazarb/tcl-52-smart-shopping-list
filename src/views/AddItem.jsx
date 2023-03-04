@@ -3,6 +3,17 @@ import './AddItem.css';
 import { addItem } from '../api/firebase';
 import { useState } from 'react';
 
+import {
+	Box,
+	Button,
+	FormControl,
+	FormLabel,
+	FormControlLabel,
+	RadioGroup,
+	Radio,
+	TextField,
+} from '@mui/material';
+
 export function AddItem({ listToken, data }) {
 	//itemName behaviour
 	const [itemName, setItemName] = useState('');
@@ -32,6 +43,7 @@ export function AddItem({ listToken, data }) {
 
 	//Error handling state
 	const [formError, setFormError] = useState({});
+	const [isFormInvalid, setIsFormInvalid] = useState(false);
 
 	// Validate Form
 	const collectFormErrors = () => {
@@ -42,13 +54,13 @@ export function AddItem({ listToken, data }) {
 		// Validation check if new list item already exists in DB -> inline error if item already exists
 		for (let i = 0; i < existingItems.length; i++) {
 			if (itemName === '') {
-				errorCollection.itemName = 'Please enter a list item';
+				errorCollection.itemName = 'Please enter an item';
 			} else if (
 				itemName
 					.replace(/\s+|[~`!@#$%^&*(){}\[\];:"'<,.>?\/\\|_+=-]/g, '')
 					.toLowerCase() === existingItems[i]
 			) {
-				errorCollection.itemName = `${itemName} already exists in your list`;
+				errorCollection.itemName = `${itemName} already exists in your Shopping List`;
 			}
 		}
 
@@ -64,7 +76,7 @@ export function AddItem({ listToken, data }) {
 
 		// If a client side error exists, set error object to state
 		if (hasErrors) {
-			return setFormError(errorCollection);
+			return setFormError(errorCollection), setIsFormInvalid(true);
 		}
 
 		//add item
@@ -84,61 +96,70 @@ export function AddItem({ listToken, data }) {
 	};
 
 	return (
-		<div>
-			<form onSubmit={submitForm}>
-				<div>
-					<label htmlFor="itemName">Item Name:</label>
-					<input
+		<>
+			<Box
+				sx={{
+					width: '50rem',
+					height: '25rem',
+					border: '.05rem solid #2c7d8c',
+					padding: '2rem',
+				}}
+			>
+				<FormControl onSubmit={submitForm} component="form" fullWidth>
+					<FormLabel>Add Item to Shopping List</FormLabel>
+					<TextField
 						id="addItemInput"
 						type="text"
-						name="itemName"
+						label="Item Name"
+						variant="standard"
 						value={itemName}
+						size="normal"
+						error={isFormInvalid}
+						helperText={formError.itemName}
 						onChange={handleChangeItem}
 					/>
-					<div className="error-message">{formError.itemName}</div>
-				</div>
-				<div>
-					<fieldset>
-						<legend>How soon will you buy this again?</legend>
-						<div>
-							<input
-								type="radio"
+					<div>
+						<FormLabel>How soon will you buy this again?</FormLabel>
+						<RadioGroup defaultValue="soon" name="radio-buttons-group">
+							<FormControlLabel
 								id="soon"
+								label="1 Week"
 								name="buyAgain"
+								control={<Radio />}
 								value={soon}
 								checked={nextPurchase === soon}
 								onChange={handleChange}
 							/>
-							<label htmlFor="soon">1 Week</label>
-						</div>
-						<div>
-							<input
-								type="radio"
+							<FormControlLabel
 								id="kindOfSoon"
+								label="2 Weeks"
 								name="buyAgain"
+								control={<Radio />}
 								value={kindOfSoon}
 								checked={nextPurchase === kindOfSoon}
 								onChange={handleChange}
-								required="required"
 							/>
-							<label htmlFor="kindOfSoon">2 Weeks</label>
-						</div>
-						<div>
-							<input
-								type="radio"
+							<FormControlLabel
 								id="notSoon"
+								label="1 Month"
 								name="buyAgain"
+								control={<Radio />}
 								value={notSoon}
 								checked={nextPurchase === notSoon}
 								onChange={handleChange}
 							/>
-							<label htmlFor="notSoon">1 Month</label>
-						</div>
-					</fieldset>
-				</div>
-				<button type="submit">Add Item</button>
-			</form>
-			<p>{submissionYes}</p>
-		</div>
+						</RadioGroup>
+					</div>
+					<Button
+						type="submit"
+						variant="contained"
+						sx={{ backgroundColor: '#0048AD' }}
+					>
+						Add Item
+					</Button>
+					<p>{submissionYes}</p>
+				</FormControl>
+			</Box>
+		</>
 	);
 }
