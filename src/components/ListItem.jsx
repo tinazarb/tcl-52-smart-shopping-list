@@ -41,8 +41,12 @@ export function ListItems({ name, data, listToken }) {
 			<List dense>
 				<ListItem
 					secondaryAction={
-						<IconButton edge="end" aria-label="delete">
-							<DeleteIcon onClick={handleDeleteItem} />
+						<IconButton
+							edge="end"
+							aria-label="delete"
+							onClick={handleDeleteItem}
+						>
+							<DeleteIcon />
 						</IconButton>
 					}
 				>
