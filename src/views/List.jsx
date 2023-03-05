@@ -30,15 +30,26 @@ export function List({ data, listToken, tokenHistory }) {
 						You have nothing on your list yet! Click below to add your first
 						item:
 					</h2>
-					<NavLink className="link" to="/add-item">
-						Add Item
-					</NavLink>
+					<button>
+						<NavLink className="link" to="/add-item" id="add-item-from-list">
+							Add Item
+						</NavLink>
+					</button>
+					<div className="list-icon">
+						<div className="list-icon-container">
+							<img
+								src="../../public/img/robot-wink.png"
+								alt="robot winking"
+								id="list-robot-img"
+							/>
+						</div>
+					</div>
 				</div>
 			) : (
 				// otherwise show people their by collection name
 				<div>
 					{/* <h1>Welcome back!</h1> */}
-          <h2>Your secret token is: {currentList}</h2>
+					<h2>Your secret token is: {currentList}</h2>
 
 					<div className="search-container">
 						<form>
@@ -91,7 +102,6 @@ export function List({ data, listToken, tokenHistory }) {
 							)}
 						</ul>
 					</div>
-
 				</div>
 			)}
 		</>
