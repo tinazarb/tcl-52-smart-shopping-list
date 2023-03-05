@@ -26,6 +26,8 @@ export function List({ data, listToken, tokenHistory }) {
 			{/* welcome people to add to their list if it's empty */}
 			{data.length === 0 ? (
 				<div>
+					<h4>Token: {currentList}</h4>
+
 					<h2>
 						You have nothing on your list yet! Click below to add your first
 						item:
@@ -38,7 +40,7 @@ export function List({ data, listToken, tokenHistory }) {
 				// otherwise show people their by collection name
 				<div>
 					{/* <h1>Welcome back!</h1> */}
-          <h2>Your secret token is: {currentList}</h2>
+					<h4>Token: {currentList}</h4>
 
 					<div className="search-container">
 						<form>
@@ -91,7 +93,6 @@ export function List({ data, listToken, tokenHistory }) {
 							)}
 						</ul>
 					</div>
-
 				</div>
 			)}
 		</>

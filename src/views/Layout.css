@@ -74,11 +74,11 @@
 }
 
 .leftNav {
-	border-right: 1.5px solid var(--color-accent);
+	border-right: 3px solid var(--color-accent);
 }
 
 .rightNav {
-	border-left: 1.5px solid var(--color-accent);
+	/* border-left: 1.5px solid var(--color-accent); */
 }
 .Layout {
 	width: 60%;
