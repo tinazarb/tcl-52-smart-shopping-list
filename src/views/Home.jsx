@@ -53,46 +53,6 @@ export function Home({
 						alt="robot waving"
 						id="home-robot-img"
 					/>
-          </div>
-        </div>
-			<p>
-				Hello from the home (<code>/</code>) page.
-			</p>
-			<button onClick={handleClick}>Create a new list!</button>
-
-			<p> Here are your previous lists</p>
-			<ul>
-				{tokenHistory.map((token) => {
-					return (
-						<li key={token}>
-							<button
-								onClick={() => {
-									setListToken(token);
-									redirect('/list');
-								}}
-							>
-								{token}
-							</button>
-						</li>
-					);
-				})}
-			</ul>
-			<p> Want to join an existing list? </p>
-			<form onSubmit={handleTokenSubmit}>
-				<label htmlFor="token"> Enter Token:</label>
-				<input
-					type="text"
-					name="token"
-					id="token"
-					value={token}
-					onChange={handleFormChange}
-					required
-					aria-describedby="token-desc"
-				/>
-				<button type="submit"> Join</button>
-				<div id="token-desc">
-					A token is three space-separated words, like{' '}
-					<code>my list token</code>
 				</div>
 			</div>
 			<h2>Welcome to your Smart Shopping List</h2>
@@ -120,6 +80,24 @@ export function Home({
 					</div>
 				</form>
 			)}
+			<p> Here are your previous lists</p>
+			<ul>
+				{tokenHistory.map((token) => {
+					return (
+						<li key={token}>
+							<button
+								onClick={() => {
+									setListToken(token);
+									redirect('/list');
+								}}
+							>
+								{token}
+							</button>
+						</li>
+					);
+				})}
+			</ul>
+
 			<p>{listNotFound}</p>
 		</div>
 	);
