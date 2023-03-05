@@ -9,7 +9,7 @@ export function useStateWithStorage(initialValue, storageKey) {
 	const [value, setValue] = useState(() => {
 		const currentValue = localStorage.getItem(storageKey);
 		// Check if currentValue needs to be JSON parsed (if it's an object/array)
-		if ((currentValue && currentValue[0] === '{') || currentValue[0] === '[') {
+		if (currentValue && (currentValue[0] === '{' || currentValue[0] === '[')) {
 			return JSON.parse(currentValue);
 		}
 		return currentValue ? currentValue : initialValue;
