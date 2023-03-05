@@ -50,7 +50,6 @@ export function Home({ handleNewToken, setListToken, listToken }) {
 					/>
 				</div>
 			</div>
-			{/* <div className="home-text"> */}
 			<h2>Welcome to your Smart Shopping List</h2>
 			<NavLink to="/about">Learn how to use the Shopping List App</NavLink>
 			<div className="home-buttons">
@@ -77,7 +76,6 @@ export function Home({ handleNewToken, setListToken, listToken }) {
 				</form>
 			)}
 			<p>{listNotFound}</p>
-			{/* </div> */}
 		</div>
 	);
 }
