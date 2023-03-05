@@ -1,6 +1,7 @@
 // TODO lower banner display that disappears on either next submission OR leaving the page
 import { addItem } from '../api/firebase';
 import { useState } from 'react';
+import './AddItem.css';
 
 import {
 	Box,
@@ -12,9 +13,17 @@ import {
 	Radio,
 	TextField,
 	Typography,
+	createTheme,
+	ThemeProvider,
 } from '@mui/material';
 
 export function AddItem({ listToken, data }) {
+	const CustomFontTheme = createTheme({
+		typography: {
+			fontSize: '1.6rem',
+		},
+	});
+
 	//itemName behaviour
 	const [itemName, setItemName] = useState('');
 
@@ -89,7 +98,7 @@ export function AddItem({ listToken, data }) {
 			await addItem(listToken, itemData);
 			setItemName('');
 			setNextPurchase(soon);
-			setSubmissionYes(`${itemName} is on your list :D`);
+			setSubmissionYes(`${itemName} successfully added to list!`);
 		} catch (err) {
 			setSubmissionYes('Please try again, something went wrong :D');
 		}
@@ -119,84 +128,115 @@ export function AddItem({ listToken, data }) {
 	};
 
 	return (
-		<>
-			<Box
-				sx={{
-					width: '50rem',
-					height: '30rem',
-					border: '.05rem solid #2c7d8c',
-					padding: '2rem',
-				}}
-			>
-				<FormControl onSubmit={submitForm} component="form" fullWidth>
-					<FormLabel>
-						<Typography {...primaryTypographyProps}>
-							Add Item to Shopping List
-						</Typography>
-					</FormLabel>
-					<TextField
-						id="addItemInput"
-						type="text"
-						label="Item Name"
-						variant="standard"
-						value={itemName}
-						size="normal"
-						error={isFormInvalid}
-						helperText={formError.itemName}
-						onChange={handleChangeItem}
-					/>
-					<div>
+		<div className="Add-item">
+			{!submissionYes ? (
+				<Box
+					sx={{
+						width: '100%',
+						height: 'auto',
+						border: '.05rem solid #2c7d8c',
+						padding: '2rem',
+					}}
+				>
+					<FormControl onSubmit={submitForm} component="form" fullWidth>
 						<FormLabel>
 							<Typography {...primaryTypographyProps}>
-								How soon will you buy this again?
+								Add Item to Shopping List
 							</Typography>
 						</FormLabel>
-						<RadioGroup defaultValue="soon" name="radio-buttons-group">
-							<FormControlLabel
-								id="soon"
-								label={
-									<Typography {...secondaryTypographyProps}>1 Week</Typography>
-								}
-								name="buyAgain"
-								control={<Radio />}
-								value={soon}
-								checked={nextPurchase === soon}
-								onChange={handleChange}
+						<ThemeProvider theme={CustomFontTheme}>
+							<TextField
+								id="addItemInput"
+								type="text"
+								label="Item Name"
+								variant="standard"
+								value={itemName}
+								sx={{ fontSize: '1.6rem' }}
+								error={isFormInvalid}
+								helperText={formError.itemName}
+								onChange={handleChangeItem}
 							/>
-							<FormControlLabel
-								id="kindOfSoon"
-								label={
-									<Typography {...secondaryTypographyProps}>2 Weeks</Typography>
-								}
-								name="buyAgain"
-								control={<Radio />}
-								value={kindOfSoon}
-								checked={nextPurchase === kindOfSoon}
-								onChange={handleChange}
-							/>
-							<FormControlLabel
-								id="notSoon"
-								label={
-									<Typography {...secondaryTypographyProps}>1 Month</Typography>
-								}
-								name="buyAgain"
-								control={<Radio />}
-								value={notSoon}
-								checked={nextPurchase === notSoon}
-								onChange={handleChange}
-							/>
-						</RadioGroup>
-					</div>
-					<Button
-						type="submit"
-						variant="contained"
-						sx={{ backgroundColor: '#0048AD' }}
-					>
-						Add Item
-					</Button>
+						</ThemeProvider>
+						<div>
+							<FormLabel>
+								<Typography {...primaryTypographyProps}>
+									How soon will you buy this again?
+								</Typography>
+							</FormLabel>
+							<RadioGroup defaultValue="soon" name="radio-buttons-group">
+								<FormControlLabel
+									id="soon"
+									label={
+										<Typography {...secondaryTypographyProps}>
+											1 Week
+										</Typography>
+									}
+									name="buyAgain"
+									control={<Radio />}
+									value={soon}
+									checked={nextPurchase === soon}
+									onChange={handleChange}
+								/>
+								<FormControlLabel
+									id="kindOfSoon"
+									label={
+										<Typography {...secondaryTypographyProps}>
+											2 Weeks
+										</Typography>
+									}
+									name="buyAgain"
+									control={<Radio />}
+									value={kindOfSoon}
+									checked={nextPurchase === kindOfSoon}
+									onChange={handleChange}
+								/>
+								<FormControlLabel
+									id="notSoon"
+									label={
+										<Typography {...secondaryTypographyProps}>
+											1 Month
+										</Typography>
+									}
+									name="buyAgain"
+									control={<Radio />}
+									value={notSoon}
+									checked={nextPurchase === notSoon}
+									onChange={handleChange}
+								/>
+							</RadioGroup>
+						</div>
+						<Button
+							type="submit"
+							variant="contained"
+							sx={{ backgroundColor: '#0048AD' }}
+						>
+							Add Item
+						</Button>
+					</FormControl>
+				</Box>
+			) : (
+				<div className="add-item-success">
 					<p>{submissionYes}</p>
-				</FormControl>
-			</Box>
-		</>
+					<div className="add-icon">
+						<div className="add-icon-container">
+							<img
+								src="../../public/img/robot-success.png"
+								alt="robot hands on hips triumphant"
+								id="add-robot-img"
+							/>
+						</div>
+					</div>
+					<button
+						onClick={() => {
+							setSubmissionYes('');
+							setFormError({});
+							setIsFormInvalid(false);
+						}}
+					>
+						Add New Item
+					</button>
+				</div>
+			)}
+		</div>
 	);
 }

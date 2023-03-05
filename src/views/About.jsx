@@ -5,7 +5,15 @@ import { NavLink } from 'react-router-dom';
 export function About() {
 	return (
 		<>
-			{/* <h2>How to Use Your Smart Shopping List App</h2> */}
+			<div className="about-icon">
+				<div className="about-icon-container">
+					<img
+						src="../../public/img/robot-wink.png"
+						alt="robot winking"
+						id="about-robot-img"
+					/>
+				</div>
+			</div>
 			<h4>Accomplish the following using the Smart Shopping List App:</h4>
 			<ul>
 				<li>Create a new shopping list</li>

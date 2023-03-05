@@ -41,6 +41,16 @@ export function Home({ handleNewToken, setListToken, listToken }) {
 
 	return (
 		<div className="Home">
+			<div className="home-icon">
+				<div className="home-icon-container">
+					<img
+						src="../../public/img/robot-wave.png"
+						alt="robot waving"
+						id="home-robot-img"
+					/>
+				</div>
+			</div>
+			{/* <div className="home-text"> */}
 			<h2>Welcome to your Smart Shopping List</h2>
 			<NavLink to="/about">Learn how to use the Shopping List App</NavLink>
 			<div className="home-buttons">
@@ -67,6 +77,7 @@ export function Home({ handleNewToken, setListToken, listToken }) {
 				</form>
 			)}
 			<p>{listNotFound}</p>
+			{/* </div> */}
 		</div>
 	);
 }

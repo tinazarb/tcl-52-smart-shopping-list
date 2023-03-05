@@ -61,7 +61,18 @@ export function List({ data, listToken }) {
 						<ul>
 							{/* sort items by urgency */}
 							{!filteredItems.length ? (
-								<p>{searchedItem} is not on your Shopping List</p>
+								<>
+									<p>{searchedItem} is not on your Shopping List</p>
+									<div className="list-icon">
+										<div className="list-icon-container">
+											<img
+												src="../../public/img/robot-mad.png"
+												alt="upset robot with steam coming out of ears"
+												id="list-robot-img"
+											/>
+										</div>
+									</div>
+								</>
 							) : (
 								filteredItems.map((list) => {
 									return (
