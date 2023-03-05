@@ -20,7 +20,7 @@ export function useStateWithStorage(initialValue, storageKey) {
 		}
 		// If value is an object/array, stringify it before storing it in localStorage
 		if (typeof value === 'object' || Array.isArray(value)) {
-			value = JSON.stringify(value);
+			return localStorage.setItem(storageKey, JSON.stringify(value));
 		}
 
 		return localStorage.setItem(storageKey, value);
