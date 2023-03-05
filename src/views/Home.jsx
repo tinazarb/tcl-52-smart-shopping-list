@@ -21,6 +21,7 @@ export function Home({
 
 	const handleCreateNewList = useCallback(() => {
 		handleNewToken();
+		redirect('/list');
 	}, [handleNewToken]);
 
 	const handleJoinExistingList = () => {
@@ -83,16 +84,18 @@ export function Home({
 			)}
 			<p> Here are your previous lists</p>
 			<ul>
-				{tokenHistory.map((token) => {
+				{tokenHistory.reverse().map((token) => {
 					return (
-						<li key={token}>
+						<li key={token.token}>
 							<button
 								onClick={() => {
-									setListToken(token);
+									setListToken(token.token);
 									redirect('/list');
 								}}
 							>
-								{token}
+								{token.alias
+									? token.alias + ' (' + token.token + ')'
+									: token.token}
 							</button>
 						</li>
 					);
