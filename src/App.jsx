@@ -21,20 +21,16 @@ export function App() {
 		'tcl-shopping-list-token-history',
 	);
 
-	// Check if the token exists in the token history but has not been migrated there, and if not, add it.
-	if (listToken && !tokenHistory.includes(listToken)) {
-		setTokenHistory([...tokenHistory, listToken]);
-	}
-	// check if token history is an array, and if not, convert it to an array.
-	if (!Array.isArray(tokenHistory)) {
-		setTokenHistory([tokenHistory]);
-	}
-
 	const handleNewToken = () => {
 		const newToken = generateToken();
 		setListToken(newToken);
+
+		var tokenObject = {
+			token: newToken,
+			alias: '',
+		};
 		// Add the new token to the token history
-		setTokenHistory([...tokenHistory, newToken]);
+		setTokenHistory([...tokenHistory, tokenObject]);
 	};
 
 	useEffect(() => {

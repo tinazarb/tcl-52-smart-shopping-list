@@ -2,6 +2,9 @@ import './List.css';
 import { ListItems } from '../components';
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import { faClipboard } from '@fortawesome/free-solid-svg-icons';
 
 export function List({ data, listToken, tokenHistory }) {
 	//set state
@@ -19,6 +22,11 @@ export function List({ data, listToken, tokenHistory }) {
 		setSearchedItem('');
 	}
 
+	const copyTokenToClipboard = () => {
+		navigator.clipboard.writeText(listToken);
+		alert('Token copied to clipboard!');
+	};
+
 	const currentList = listToken;
 
 	return (
@@ -26,6 +34,15 @@ export function List({ data, listToken, tokenHistory }) {
 			{/* welcome people to add to their list if it's empty */}
 			{data.length === 0 ? (
 				<div>
+					<h4>
+						<span>Sharing Token: {currentList}</span>
+						<FontAwesomeIcon
+							icon={faClipboard}
+							style={{ cursor: 'pointer', marginLeft: '10px' }}
+							onClick={copyTokenToClipboard}
+						/>
+					</h4>
+
 					<h2>
 						You have nothing on your list yet! Click below to add your first
 						item:
@@ -49,7 +66,15 @@ export function List({ data, listToken, tokenHistory }) {
 				// otherwise show people their by collection name
 				<div>
 					{/* <h1>Welcome back!</h1> */}
-					<h2>Your secret token is: {currentList}</h2>
+					<h4>
+						<span>Sharing Token: {currentList}</span>
+						<FontAwesomeIcon
+							icon={faClipboard}
+							style={{ cursor: 'pointer', marginLeft: '10px' }}
+							onClick={copyTokenToClipboard}
+						/>
+					</h4>
+
 
 					<div className="search-container">
 						<form>

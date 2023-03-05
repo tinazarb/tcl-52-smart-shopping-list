@@ -1,6 +1,7 @@
 // TODO lower banner display that disappears on either next submission OR leaving the page
 import { addItem } from '../api/firebase';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './AddItem.css';
 
 import {
@@ -18,6 +19,8 @@ import {
 } from '@mui/material';
 
 export function AddItem({ listToken, data }) {
+	const redirect = useNavigate();
+
 	const CustomFontTheme = createTheme({
 		typography: {
 			fontSize: '1.6rem',
@@ -233,7 +236,14 @@ export function AddItem({ listToken, data }) {
 							setIsFormInvalid(false);
 						}}
 					>
-						Add New Item
+						Add Another Item
+					</button>
+					<button
+						onClick={() => {
+							redirect('/list');
+						}}
+					>
+						Return to List
 					</button>
 				</div>
 			)}

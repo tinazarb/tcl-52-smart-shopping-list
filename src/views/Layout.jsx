@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHouse } from '@fortawesome/free-solid-svg-icons';
 import { faListDots } from '@fortawesome/free-solid-svg-icons';
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 
@@ -18,6 +19,12 @@ export function Layout({ listToken }) {
 				</main>
 				{listToken ? (
 					<nav className="Nav">
+						<div className="buttonContainer leftNav">
+							<NavLink to="/" className="Nav-link">
+								<FontAwesomeIcon icon={faHouse} />
+								<span>Home</span>
+							</NavLink>
+						</div>
 						<div className="buttonContainer leftNav">
 							<NavLink to="/list" className="Nav-link">
 								<FontAwesomeIcon icon={faListDots} />

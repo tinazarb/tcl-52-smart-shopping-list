@@ -83,16 +83,22 @@ export async function updateItem(listId, itemId, nextData) {
 	return await updateDoc(itemRef, nextData);
 }
 
+const URGENCY_NOT_SOON = 'Not Soon';
+const URGENCY_KIND_OF_SOON = 'Kind of Soon';
+const URGENCY_SOON = 'Soon';
+const URGENCY_OVERDUE = 'Overdue';
+const URGENCY_INACTIVE = 'Inactive';
+
 //create an urgency flag for sorting the list
 const urgencyFlag = (daysBetween) => {
 	if (daysBetween >= 30) {
-		return 'Not Soon';
+		return URGENCY_NOT_SOON;
 	} else if (daysBetween >= 7) {
-		return 'Kind of Soon';
+		return URGENCY_KIND_OF_SOON;
 	} else if (daysBetween >= 0) {
-		return 'Soon';
+		return URGENCY_SOON;
 	} else if (daysBetween <= -1) {
-		return 'Overdue';
+		return URGENCY_OVERDUE;
 	}
 	return '';
 };
@@ -116,34 +122,24 @@ export async function comparePurchaseUrgency(itemList) {
 					item.dateLastPurchased.toDate().getTime(),
 				) >= 60
 			) {
-				item.urgency = 'Inactive';
+				item.urgency = URGENCY_INACTIVE;
 			}
 		}
 	});
 
+	// sort the list by urgency, placing inactive items to the bottom
 	itemList.sort((a, b) => {
-		return a.dateNextPurchased - b.dateNextPurchased;
-	});
-
-	// Sort items with same day alphabetically:
-	itemList.sort((a, b) => {
-		if (
-			a.dateNextPurchased.toDate().getDay() ===
-			b.dateNextPurchased.toDate().getDay()
-		) {
-			return a.name.localeCompare(b.name);
-		}
-		return a.dateNextPurchased - b.dateNextPurchased;
-	});
-
-	// Place items with inactive urgency at the end of the list
-	itemList.sort((a, b) => {
-		if (a.urgency === 'inactive') {
+		if (a.urgency === URGENCY_INACTIVE) {
 			return 1;
-		} else if (b.urgency === 'inactive') {
+		} else if (b.urgency === URGENCY_INACTIVE) {
 			return -1;
+		} else if (a.dateNextPurchased.toDate() === b.dateNextPurchased.toDate()) {
+			// if same date, alphabetically sort
+			return a.name.localeCompare(b.name);
 		} else {
-			return 0;
+			return a.dateNextPurchased.toDate() > b.dateNextPurchased.toDate()
+				? 1
+				: -1;
 		}
 	});
 }
