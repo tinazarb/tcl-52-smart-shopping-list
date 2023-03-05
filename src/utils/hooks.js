@@ -8,12 +8,21 @@ import { useState, useEffect } from 'react';
 export function useStateWithStorage(initialValue, storageKey) {
 	const [value, setValue] = useState(() => {
 		const currentValue = localStorage.getItem(storageKey);
+		// Check if currentValue needs to be JSON parsed (if it's an object/array)
+		if ((currentValue && currentValue[0] === '{') || currentValue[0] === '[') {
+			return JSON.parse(currentValue);
+		}
 		return currentValue ? currentValue : initialValue;
 	});
 	useEffect(() => {
 		if (value === null || value === undefined) {
 			return localStorage.removeItem(storageKey);
 		}
+		// If value is an object/array, stringify it before storing it in localStorage
+		if (typeof value === 'object' || Array.isArray(value)) {
+			value = JSON.stringify(value);
+		}
+
 		return localStorage.setItem(storageKey, value);
 	}, [storageKey, value]);
 	return [value, setValue];
