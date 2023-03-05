@@ -4,7 +4,17 @@ import { updateItem, deleteItem } from '../api';
 import { getDaysBetweenDates } from '../utils';
 import { calculateEstimate } from '@the-collab-lab/shopping-list-utils';
 
-export function ListItem({ name, data, listToken }) {
+import {
+	Checkbox,
+	List,
+	ListItem,
+	ListItemText,
+	IconButton,
+	Typography,
+} from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+
+export function ListItems({ name, data, listToken }) {
 	const initialChecked =
 		Date.now() - data.dateLastPurchased?.toMillis() < 86400000 || false;
 
@@ -27,25 +37,45 @@ export function ListItem({ name, data, listToken }) {
 		}
 	}
 
+	const primaryTypographyProps = {
+		style: {
+			fontFamily:
+				"'Manrope', sans-serif, -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Ubuntu, roboto, noto, arial, sans-serif",
+			fontWeight: '600',
+			fontSize: '1.6rem',
+			lineHeight: '1.4',
+		},
+	};
+
 	return (
 		<>
-			<li className="ListItem">
-				<input
-					className="ListItem-checkbox"
-					type="checkbox"
-					id="listItem"
-					value={name}
-					checked={isChecked}
-					onChange={handleSelect}
-				/>
-				<label htmlFor="listItem" className="ListItem-label">
-					{name}
-				</label>
-				<label className="ListItem-urgency">{data.urgency}</label>
-				<button type="button" onClick={handleDeleteItem}>
-					Delete
-				</button>
-			</li>
+			<List dense>
+				<ListItem
+					secondaryAction={
+						<IconButton
+							edge="end"
+							aria-label="delete"
+							onClick={handleDeleteItem}
+						>
+							<DeleteIcon />
+						</IconButton>
+					}
+				>
+					<Checkbox
+						className="ListItem-checkbox"
+						id="listItem"
+						checked={isChecked}
+						onChange={handleSelect}
+					/>
+					<ListItemText
+						primary={
+							<Typography {...primaryTypographyProps}>{name}</Typography>
+						}
+					/>
+
+					<label className="ListItem-urgency">{data.urgency}</label>
+				</ListItem>
+			</List>
 		</>
 	);
 }

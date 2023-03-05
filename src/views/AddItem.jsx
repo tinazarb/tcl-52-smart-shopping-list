@@ -1,9 +1,29 @@
 // TODO lower banner display that disappears on either next submission OR leaving the page
-import './AddItem.css';
 import { addItem } from '../api/firebase';
 import { useState } from 'react';
+import './AddItem.css';
+
+import {
+	Box,
+	Button,
+	FormControl,
+	FormLabel,
+	FormControlLabel,
+	RadioGroup,
+	Radio,
+	TextField,
+	Typography,
+	createTheme,
+	ThemeProvider,
+} from '@mui/material';
 
 export function AddItem({ listToken, data }) {
+	const CustomFontTheme = createTheme({
+		typography: {
+			fontSize: '1.6rem',
+		},
+	});
+
 	//itemName behaviour
 	const [itemName, setItemName] = useState('');
 
@@ -32,6 +52,7 @@ export function AddItem({ listToken, data }) {
 
 	//Error handling state
 	const [formError, setFormError] = useState({});
+	const [isFormInvalid, setIsFormInvalid] = useState(false);
 
 	// Validate Form
 	const collectFormErrors = () => {
@@ -42,13 +63,13 @@ export function AddItem({ listToken, data }) {
 		// Validation check if new list item already exists in DB -> inline error if item already exists
 		for (let i = 0; i < existingItems.length; i++) {
 			if (itemName === '') {
-				errorCollection.itemName = 'Please enter a list item';
+				errorCollection.itemName = 'Please enter an item';
 			} else if (
 				itemName
 					.replace(/\s+|[~`!@#$%^&*(){}\[\];:"'<,.>?\/\\|_+=-]/g, '')
 					.toLowerCase() === existingItems[i]
 			) {
-				errorCollection.itemName = `${itemName} already exists in your list`;
+				errorCollection.itemName = `${itemName} already exists in your Shopping List`;
 			}
 		}
 
@@ -64,7 +85,7 @@ export function AddItem({ listToken, data }) {
 
 		// If a client side error exists, set error object to state
 		if (hasErrors) {
-			return setFormError(errorCollection);
+			return [setFormError(errorCollection), setIsFormInvalid(true)];
 		}
 
 		//add item
@@ -77,68 +98,145 @@ export function AddItem({ listToken, data }) {
 			await addItem(listToken, itemData);
 			setItemName('');
 			setNextPurchase(soon);
-			setSubmissionYes(`${itemName} is on your list :D`);
+			setSubmissionYes(`${itemName} successfully added to list!`);
 		} catch (err) {
 			setSubmissionYes('Please try again, something went wrong :D');
 		}
 	};
 
+	const primaryTypographyProps = {
+		style: {
+			fontFamily:
+				"'Manrope', sans-serif, -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Ubuntu, roboto, noto, arial, sans-serif",
+			fontWeight: '600',
+			fontSize: '1.6rem',
+			lineHeight: '1.4',
+			color: 'var(--color-aqua-blue)',
+			paddingTop: '.8rem',
+		},
+	};
+
+	const secondaryTypographyProps = {
+		style: {
+			fontFamily:
+				"'Manrope', sans-serif, -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Ubuntu, roboto, noto, arial, sans-serif",
+			fontWeight: '600',
+			fontSize: '1.3rem',
+			lineHeight: '1.4',
+			color: 'var(--color-aqua-blue)',
+		},
+	};
+
 	return (
-		<div>
-			<form onSubmit={submitForm}>
-				<div>
-					<label htmlFor="itemName">Item Name:</label>
-					<input
-						id="addItemInput"
-						type="text"
-						name="itemName"
-						value={itemName}
-						onChange={handleChangeItem}
-					/>
-					<div className="error-message">{formError.itemName}</div>
+		<div className="Add-item">
+			{!submissionYes ? (
+				<Box
+					sx={{
+						width: '100%',
+						height: 'auto',
+						border: '.05rem solid #2c7d8c',
+						padding: '2rem',
+					}}
+				>
+					<FormControl onSubmit={submitForm} component="form" fullWidth>
+						<FormLabel>
+							<Typography {...primaryTypographyProps}>
+								Add Item to Shopping List
+							</Typography>
+						</FormLabel>
+						<ThemeProvider theme={CustomFontTheme}>
+							<TextField
+								id="addItemInput"
+								type="text"
+								label="Item Name"
+								variant="standard"
+								value={itemName}
+								sx={{ fontSize: '1.6rem' }}
+								error={isFormInvalid}
+								helperText={formError.itemName}
+								onChange={handleChangeItem}
+							/>
+						</ThemeProvider>
+						<div>
+							<FormLabel>
+								<Typography {...primaryTypographyProps}>
+									How soon will you buy this again?
+								</Typography>
+							</FormLabel>
+							<RadioGroup defaultValue="soon" name="radio-buttons-group">
+								<FormControlLabel
+									id="soon"
+									label={
+										<Typography {...secondaryTypographyProps}>
+											1 Week
+										</Typography>
+									}
+									name="buyAgain"
+									control={<Radio />}
+									value={soon}
+									checked={nextPurchase === soon}
+									onChange={handleChange}
+								/>
+								<FormControlLabel
+									id="kindOfSoon"
+									label={
+										<Typography {...secondaryTypographyProps}>
+											2 Weeks
+										</Typography>
+									}
+									name="buyAgain"
+									control={<Radio />}
+									value={kindOfSoon}
+									checked={nextPurchase === kindOfSoon}
+									onChange={handleChange}
+								/>
+								<FormControlLabel
+									id="notSoon"
+									label={
+										<Typography {...secondaryTypographyProps}>
+											1 Month
+										</Typography>
+									}
+									name="buyAgain"
+									control={<Radio />}
+									value={notSoon}
+									checked={nextPurchase === notSoon}
+									onChange={handleChange}
+								/>
+							</RadioGroup>
+						</div>
+						<Button
+							type="submit"
+							variant="contained"
+							sx={{ backgroundColor: '#0048AD' }}
+						>
+							Add Item
+						</Button>
+					</FormControl>
+				</Box>
+			) : (
+				<div className="add-item-success">
+					<p>{submissionYes}</p>
+					<div className="add-icon">
+						<div className="add-icon-container">
+							<img
+								src="../../public/img/robot-success.png"
+								alt="robot hands on hips triumphant"
+								id="add-robot-img"
+							/>
+						</div>
+					</div>
+					<button
+						onClick={() => {
+							setSubmissionYes('');
+							setFormError({});
+							setIsFormInvalid(false);
+						}}
+					>
+						Add New Item
+					</button>
 				</div>
-				<div>
-					<fieldset>
-						<legend>How soon will you buy this again?</legend>
-						<div>
-							<input
-								type="radio"
-								id="soon"
-								name="buyAgain"
-								value={soon}
-								checked={nextPurchase === soon}
-								onChange={handleChange}
-							/>
-							<label htmlFor="soon">Soon</label>
-						</div>
-						<div>
-							<input
-								type="radio"
-								id="kindOfSoon"
-								name="buyAgain"
-								value={kindOfSoon}
-								checked={nextPurchase === kindOfSoon}
-								onChange={handleChange}
-								required="required"
-							/>
-							<label htmlFor="kindOfSoon">Kind Of Soon</label>
-						</div>
-						<div>
-							<input
-								type="radio"
-								id="notSoon"
-								name="buyAgain"
-								value={notSoon}
-								checked={nextPurchase === notSoon}
-								onChange={handleChange}
-							/>
-							<label htmlFor="notSoon">Not Soon</label>
-						</div>
-					</fieldset>
-				</div>
-				<button type="submit">Add Item</button>
-			</form>
-			<p>{submissionYes}</p>
+			)}
 		</div>
 	);
 }

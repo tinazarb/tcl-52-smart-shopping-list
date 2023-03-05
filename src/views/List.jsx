@@ -1,4 +1,5 @@
-import { ListItem } from '../components';
+import './List.css';
+import { ListItems } from '../components';
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
@@ -25,62 +26,72 @@ export function List({ data, listToken, tokenHistory }) {
 			{/* welcome people to add to their list if it's empty */}
 			{data.length === 0 ? (
 				<div>
-					<h1>Hello!</h1>
 					<h2>
-						You have nothing on your list yet! Click here to add your first
+						You have nothing on your list yet! Click below to add your first
 						item:
 					</h2>
 					<NavLink className="link" to="/add-item">
-						Add item page
+						Add Item
 					</NavLink>
 				</div>
 			) : (
 				// otherwise show people their by collection name
 				<div>
-					<h1>Welcome back to your list!</h1>
-					<h2>Your secret token is: {currentList}</h2>
-					<span>Token History</span>
-					<ul>
-						{tokenHistory.map((token) => {
-							return <li key={token}>{token}</li>;
-						})}
-					</ul>
-					<form>
-						<label htmlFor="filter">Filter Items:</label>
-						<input
-							id="filter"
-							type="text"
-							inputMode="search"
-							value={searchedItem}
-							onChange={handleChange}
-							placeholder="Start Typing here..."
-						/>
-						<button
-							type="button"
-							onClick={buttonClick}
-							disabled={searchedItem.length === 0}
-							className="clearButton"
-						>
-							Clear
-						</button>
-					</form>
-					<ul>
-						{/* sort items by urgency */}
-						{!filteredItems.length ? (
-							<p>It's not here!</p>
-						) : (
-							filteredItems.map((list) => {
-								return (
-									<ListItem
-										name={list.name}
-										key={list.id}
-										data={list}
-										listToken={listToken}
-									/>
-								);
-							})
-						)}
-					</ul>
+					{/* <h1>Welcome back!</h1> */}
+          <h2>Your secret token is: {currentList}</h2>
+
+					<div className="search-container">
+						<form>
+							<label htmlFor="filter">Filter Items:</label>
+							<input
+								id="filter"
+								type="text"
+								inputMode="search"
+								value={searchedItem}
+								onChange={handleChange}
+								placeholder="Start Typing here..."
+							/>
+							<button
+								type="button"
+								onClick={buttonClick}
+								disabled={searchedItem.length === 0}
+								className="clearButton"
+							>
+								Clear
+							</button>
+						</form>
+					</div>
+					<div className="shopping-list">
+						<ul>
+							{/* sort items by urgency */}
+							{!filteredItems.length ? (
+								<>
+									<p>{searchedItem} is not on your Shopping List</p>
+									<div className="list-icon">
+										<div className="list-icon-container">
+											<img
+												src="../../public/img/robot-mad.png"
+												alt="upset robot with steam coming out of ears"
+												id="list-robot-img"
+											/>
+										</div>
+									</div>
+								</>
+							) : (
+								filteredItems.map((list) => {
+									return (
+										<ListItems
+											name={list.name}
+											key={list.id}
+											data={list}
+											listToken={listToken}
+										/>
+									);
+								})
+							)}
+						</ul>
+					</div>
+
 				</div>
 			)}
 		</>

@@ -1,7 +1,7 @@
 :root {
 	--color-black: hsla(220, 13%, 18%, 1);
 	--color-black-brown: hsla(33, 22%, 16%, 1);
-	--color-white: hsla(220, 13%, 98%, 1);
+	--color-white: rgb(255, 255, 255);
 	--color-gray-dark: hsla(220, 13%, 25%, 1);
 	--color-gray-light: hsla(0, 0%, 77%, 1);
 	--color-emerald-green: hsla(168, 92%, 25%, 1);
@@ -13,16 +13,16 @@
 	--color-pastel-blue: hsla(215, 100%, 73%, 1);
 	--color-red: hsl(0, 68%, 42%);
 
-	--color-accent: var(--color-white);
-	--color-bg: var(--color-aqua-blue);
+	--color-accent: var(--color-aqua-blue);
+	--color-bg: var(--color-white);
 	--color-bg-well: var(--color-gray-dark);
 	--color-error: var(--color-red);
-	--color-text: var(--color-white);
+	--color-text: var(--color-aqua-blue);
 }
 
 @media screen and (prefers-color-scheme: light) {
 	:root {
-		--color-accent: var(--color-cobalt-blue);
+		--color-accent: var(--color-aqua-blue);
 		--color-bg: var(--color-white);
 		--color-bg-well: var(--color-gray-light);
 		--color-text: var(--color-aqua-blue);
@@ -73,7 +73,7 @@ body {
 
 code {
 	--color-bg: var(--color-gray-dark);
-	--color-text: var(--color-accent);
+	--color-text: var(--color-white);
 
 	background-color: var(--color-bg);
 	border-radius: 4px;
@@ -127,8 +127,6 @@ fieldset {
 }
 
 .link {
-	background-color: var(--color-white);
-	border: 1px var(--color-white);
 	padding: 0.3em;
 	border-radius: 6px;
 }
