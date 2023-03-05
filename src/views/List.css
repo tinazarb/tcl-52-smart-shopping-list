@@ -16,3 +16,8 @@
 	width: 80%;
 	height: auto;
 }
+
+a#add-item-from-list {
+	color: white;
+	text-decoration: none;
+}
