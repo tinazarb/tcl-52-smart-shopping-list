@@ -24,9 +24,26 @@ export function App() {
 		'tcl-shopping-list-token',
 	);
 
+	// Create/get a history of list tokens used so we can show the user all the lists they've ever viewed and jump between them.
+	const [tokenHistory, setTokenHistory] = useStateWithStorage(
+		[],
+		'tcl-shopping-list-token-history',
+	);
+
+	// Check if the token exists in the token history but has not been migrated there, and if not, add it.
+	if (listToken && !tokenHistory.includes(listToken)) {
+		setTokenHistory([...tokenHistory, listToken]);
+	}
+	// check if token history is an array, and if not, convert it to an array.
+	if (!Array.isArray(tokenHistory)) {
+		setTokenHistory([tokenHistory]);
+	}
+
 	const handleNewToken = () => {
 		const newToken = generateToken();
 		setListToken(newToken);
+		// Add the new token to the token history
+		setTokenHistory([...tokenHistory, newToken]);
 	};
 
 	useEffect(() => {
@@ -64,12 +81,19 @@ export function App() {
 								handleNewToken={handleNewToken}
 								setListToken={setListToken}
 								listToken={listToken}
+								tokenHistory={tokenHistory}
 							/>
 						}
 					/>
 					<Route
 						path="/list"
-						element={<List data={data} listToken={listToken} />}
+						element={
+							<List
+								data={data}
+								listToken={listToken}
+								tokenHistory={tokenHistory}
+							/>
+						}
 					/>
 					<Route
 						path="/add-item"

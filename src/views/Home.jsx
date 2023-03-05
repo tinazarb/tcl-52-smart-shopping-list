@@ -3,7 +3,12 @@ import { useCallback, useState } from 'react';
 import { checkListToken } from '../api/firebase';
 import { useNavigate } from 'react-router-dom';
 
-export function Home({ handleNewToken, setListToken, listToken }) {
+export function Home({
+	handleNewToken,
+	setListToken,
+	listToken,
+	tokenHistory,
+}) {
 	const [token, setToken] = useState('');
 	const [listNotFound, setlistNotFound] = useState('');
 	const redirect = useNavigate();
@@ -40,6 +45,24 @@ export function Home({ handleNewToken, setListToken, listToken }) {
 				Hello from the home (<code>/</code>) page.
 			</p>
 			<button onClick={handleClick}>Create a new list!</button>
+
+			<p> Here are your previous lists</p>
+			<ul>
+				{tokenHistory.map((token) => {
+					return (
+						<li key={token}>
+							<button
+								onClick={() => {
+									setListToken(token);
+									redirect('/list');
+								}}
+							>
+								{token}
+							</button>
+						</li>
+					);
+				})}
+			</ul>
 			<p> Want to join an existing list? </p>
 			<form onSubmit={handleTokenSubmit}>
 				<label htmlFor="token"> Enter Token:</label>
