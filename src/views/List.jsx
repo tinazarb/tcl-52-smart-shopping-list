@@ -47,9 +47,20 @@ export function List({ data, listToken, tokenHistory }) {
 						You have nothing on your list yet! Click below to add your first
 						item:
 					</h2>
-					<NavLink className="link" to="/add-item">
-						Add Item
-					</NavLink>
+					<button>
+						<NavLink className="link" to="/add-item" id="add-item-from-list">
+							Add Item
+						</NavLink>
+					</button>
+					<div className="list-icon">
+						<div className="list-icon-container">
+							<img
+								src="../../public/img/robot-wink.png"
+								alt="robot winking"
+								id="list-robot-img"
+							/>
+						</div>
+					</div>
 				</div>
 			) : (
 				// otherwise show people their by collection name
@@ -63,6 +74,7 @@ export function List({ data, listToken, tokenHistory }) {
 							onClick={copyTokenToClipboard}
 						/>
 					</h4>
+
 
 					<div className="search-container">
 						<form>
