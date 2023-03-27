@@ -9,6 +9,7 @@ import { faClipboard } from '@fortawesome/free-solid-svg-icons';
 export function List({ data, listToken, tokenHistory }) {
 	//set state
 	const [searchedItem, setSearchedItem] = useState('');
+	const [copiedToken, setCopiedToken] = useState(false);
 	//filtering items searched
 	const filteredItems = data.filter((item) =>
 		item.name.toLowerCase().includes(searchedItem.toLowerCase()),
@@ -23,11 +24,13 @@ export function List({ data, listToken, tokenHistory }) {
 	}
 
 	const copyTokenToClipboard = () => {
-		navigator.clipboard.writeText(listToken);
-		alert('Token copied to clipboard!');
-	};
+		window.navigator.clipboard.writeText(listToken);
+		setCopiedToken(true);
 
-	const currentList = listToken;
+		setTimeout(() => {
+			setCopiedToken(false);
+		}, 2000);
+	};
 
 	return (
 		<>
@@ -35,14 +38,14 @@ export function List({ data, listToken, tokenHistory }) {
 			{data.length === 0 ? (
 				<div>
 					<h4>
-						<span>Sharing Token: {currentList}</span>
+						<span>Sharing Token: {listToken}</span>
 						<FontAwesomeIcon
 							icon={faClipboard}
 							style={{ cursor: 'pointer', marginLeft: '10px' }}
 							onClick={copyTokenToClipboard}
 						/>
 					</h4>
-
+					{copiedToken && <p>Copied to clipboard!</p>}
 					<h2>
 						You have nothing on your list yet! Click below to add your first
 						item:
@@ -67,14 +70,14 @@ export function List({ data, listToken, tokenHistory }) {
 				<div>
 					{/* <h1>Welcome back!</h1> */}
 					<h4>
-						<span>Sharing Token: {currentList}</span>
+						<span>Sharing Token: {listToken}</span>
 						<FontAwesomeIcon
 							icon={faClipboard}
 							style={{ cursor: 'pointer', marginLeft: '10px' }}
 							onClick={copyTokenToClipboard}
 						/>
 					</h4>
-
+					{copiedToken && <p>Copied to clipboard!</p>}
 
 					<div className="search-container">
 						<form>
