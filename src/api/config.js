@@ -1,14 +1,15 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
+import { config } from '../../secrets';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDyAZVQ1G9CBFXBCp0aNTwvt4ojle0JHX4",
-  authDomain: "tcl-52-smart-shopping-list.firebaseapp.com",
-  projectId: "tcl-52-smart-shopping-list",
-  storageBucket: "tcl-52-smart-shopping-list.appspot.com",
-  messagingSenderId: "380992563508",
-  appId: "1:380992563508:web:0a2c04044d26bd83b79d61"
+	apiKey: config.FIREBASE_API_KEY,
+	authDomain: config.FIREBASE_AUTH_DOMAIN,
+	projectId: config.FIREBASE_PROJECT_ID,
+	storageBucket: config.FIREBASE_STORAGE_BUCKET,
+	messagingSenderId: config.FIREBASE_MESSAGING_SENDER_ID,
+	appId: config.FIREBASE_APP_ID,
 };
 
 // Initialize Firebase
