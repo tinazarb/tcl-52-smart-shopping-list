@@ -11,9 +11,9 @@ export function Layout({ listToken }) {
 	return (
 		<>
 			<div className="Layout">
-				<header className="Layout-header">
+				{/* <header className="Layout-header">
 					<h1>Smart Shopping List</h1>
-				</header>
+				</header> */}
 				<main className="Layout-main">
 					<Outlet />
 				</main>

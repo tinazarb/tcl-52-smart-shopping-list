@@ -7,8 +7,8 @@ import { VitePWA } from 'vite-plugin-pwa';
 const PWAConfig = {
 	includeAssets: ['favicon.ico', 'robots.txt'],
 	manifest: {
-		short_name: 'Smart Shopping List',
-		name: 'TCL Smart Shopping List',
+		short_name: 'Limey',
+		name: 'Limey - Your Smart Shopping List',
 		description:
 			"A smart shopping list that learns your purchase habits and makes suggestions, so you don't forget to buy what's important.",
 		icons: [
@@ -18,12 +18,12 @@ const PWAConfig = {
 				type: 'image/x-icon',
 			},
 			{
-				src: 'logo192.png',
+				src: 'limey192.png',
 				type: 'image/png',
 				sizes: '192x192',
 			},
 			{
-				src: 'logo512.png',
+				src: 'limey512.png',
 				type: 'image/png',
 				sizes: '512x512',
 			},

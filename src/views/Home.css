@@ -2,25 +2,31 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	flex-grow: 1;
 }
 
-.home-icon {
-	width: 100%;
-	display: flex;
-	justify-content: center;
+.logo {
+	position: relative;
+	padding: 0 1em 0 2.625em;
+	margin: 1rem auto 0 auto;
+	font-size: 2.25rem;
 }
 
-.home-icon-container {
-	width: 50%;
-	display: flex;
-	justify-content: center;
-	background-color: #3696a7;
-	border-radius: 75%;
+.logo-heading {
+	position: relative;
+	margin: 0.0625em 0 0 0;
+	font-size: 2em;
+	font-weight: 400;
+	line-height: 1.5;
+	text-transform: lowercase;
 }
 
-#home-robot-img {
-	width: 80%;
-	height: auto;
+.logo-image {
+	position: absolute;
+	top: 0;
+	left: -1.9125em;
+	width: 1.8em;
+	height: 1.8em;
 }
 
 .home-buttons {
