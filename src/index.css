@@ -1,7 +1,11 @@
-:root {
-	--color-black: hsla(220, 13%, 18%, 1);
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* :root {
+	--color-black: hsla(220, 13%, 18 %, 1);
 	--color-black-brown: hsla(33, 22%, 16%, 1);
-	--color-white: rgb(255, 255, 255);
+	--color-white: rgb(255, 255, 255);P
 	--color-gray-dark: hsla(220, 13%, 25%, 1);
 	--color-gray-light: hsla(0, 0%, 77%, 1);
 	--color-emerald-green: hsla(168, 92%, 25%, 1);
@@ -42,9 +46,6 @@
 	box-sizing: border-box;
 }
 
-/**
- * Make sure the app fills the height of the viewport
- */
 html,
 body,
 #root,
@@ -129,4 +130,4 @@ fieldset {
 .link {
 	padding: 0.3em;
 	border-radius: 6px;
-}
+} */
