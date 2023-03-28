@@ -47,63 +47,75 @@ export function Home({
 	};
 
 	return (
-		<div className="Home">
-			<div className="logo">
-				<h1 className="logo-heading">
-					Limey
-					<img
-						className="logo-image"
-						src="../../public/img/limey.png"
-						alt="logo"
-					/>
-				</h1>
-			</div>
-			<h2>Welcome to your Smart Shopping List</h2>
-			<div className="home-buttons">
-				<button onClick={handleCreateNewList}>Create List</button>
-				<button onClick={handleJoinExistingList}>Join List</button>
-			</div>
-			{showJoinList && (
-				<form onSubmit={handleTokenSubmit}>
-					<label htmlFor="token"> Enter Token:</label>
-					<input
-						type="text"
-						name="token"
-						id="token"
-						value={token}
-						onChange={handleFormChange}
-						required
-						aria-describedby="token-desc"
-					/>
-					<button type="submit"> Join</button>
-					<div id="token-desc">
-						A token is three space-separated words, like{' '}
-						<code>my list token</code>
-					</div>
-				</form>
-			)}
-			<NavLink to="/about">Learn how to use the Shopping List App</NavLink>
-			{tokenHistory.length ? <p> Here are your previous lists</p> : <></>}
-			<ul>
-				{tokenHistory.reverse().map((token) => {
-					return (
-						<li key={token.token}>
-							<button
-								onClick={() => {
-									setListToken(token.token);
-									redirect('/list');
-								}}
-							>
-								{token.alias
-									? token.alias + ' (' + token.token + ')'
-									: token.token}
-							</button>
-						</li>
-					);
-				})}
-			</ul>
+		<div className="h-screen flex flex-col items-center justify-between relative pt-[5%]">
+			<div className="flex flex-col items-center gap-6">
+				<img className="w-20" src="../../public/img/limey.png" alt="logo" />
+				<h1 className="text-6xl font-logo -my-2">Limey</h1>
 
-			<p>{listNotFound}</p>
+				<h2 className="text-2xl font-logo text-center px-5">
+					Welcome to your <strong className="text-main-darkest"> smart</strong>{' '}
+					shopping list
+				</h2>
+				<div className="flex flex-col items-center gap-6 mt-6">
+					<button
+						className="bg-main-darkest text-white border-[1.5px] border-main-darkest rounded-3xl shadow-[0_4px_4px_rgba(0,0,0,0.4)] py-2 px-12 hover:bg-charcoal hover:border-charcoal"
+						onClick={handleCreateNewList}
+					>
+						Create List
+					</button>
+					<button
+						className="bg-white text-black border-[1.5px] border-black rounded-3xl shadow-[0_4px_4px_rgba(0,0,0,0.4)] py-2 px-12 hover:bg-medium-gray "
+						onClick={handleJoinExistingList}
+					>
+						Join List
+					</button>
+				</div>
+				{showJoinList && (
+					<form onSubmit={handleTokenSubmit}>
+						<h3 className="">Want to join an existing list?</h3>
+						<label htmlFor="token"> Enter Token:</label>
+						<input
+							type="text"
+							name="token"
+							id="token"
+							value={token}
+							onChange={handleFormChange}
+							required
+							aria-describedby="token-desc"
+						/>
+						<button type="submit"> Join</button>
+						<div id="token-desc">
+							A token is three space-separated words, like{' '}
+							<code>my list token</code>
+						</div>
+					</form>
+				)}
+				<p>{listNotFound}</p>
+
+				<NavLink to="/about" className="text-m font-bold hover:text-main">
+					Learn how Limey works &raquo;
+				</NavLink>
+				{/* {tokenHistory.length ? <p> Here are your previous lists</p> : <></>}
+				<ul>
+					{tokenHistory.reverse().map((token) => {
+						return (
+							<li key={token.token}>
+								<button
+									onClick={() => {
+										setListToken(token.token);
+										redirect('/list');
+									}}
+								>
+									{token.alias
+										? token.alias + ' (' + token.token + ')'
+										: token.token}
+								</button>
+							</li>
+						);
+					})}
+				</ul> */}
+			</div>
+			<div className="bg-[url('/img/fruit-background-horizontal.jpg')] w-full h-[20rem] bg-cover"></div>
 		</div>
 	);
 }
