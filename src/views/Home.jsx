@@ -2,6 +2,8 @@ import './Home.css';
 import { useCallback, useState } from 'react';
 import { checkListToken } from '../api/firebase';
 import { NavLink, useNavigate } from 'react-router-dom';
+import ReactDOM from 'react-dom';
+import JoinListModal from '../components/JoinListModal';
 
 export function Home({
 	handleNewToken,
@@ -28,6 +30,10 @@ export function Home({
 		setShowJoinList(true);
 	};
 
+	const closeJoinExistingList = () => {
+		setShowJoinList(false);
+	};
+
 	const handleFormChange = (e) => {
 		const value = e.target.value;
 		setToken(value);
@@ -42,7 +48,11 @@ export function Home({
 			setListToken(caseSensitiveToken);
 			redirect('/list');
 		} else {
-			setlistNotFound('Could not find this list');
+			setlistNotFound('Sorry, could not find this list. Please try again.');
+
+			setTimeout(() => {
+				setlistNotFound('');
+			}, 3000);
 		}
 	};
 
@@ -51,7 +61,6 @@ export function Home({
 			<div className="flex flex-col items-center gap-6">
 				<img className="w-20" src="../../public/img/limey.png" alt="logo" />
 				<h1 className="text-6xl font-logo -my-2">Limey</h1>
-
 				<h2 className="text-2xl font-logo text-center px-5">
 					Welcome to your <strong className="text-main-darkest"> smart</strong>{' '}
 					shopping list
@@ -64,34 +73,23 @@ export function Home({
 						Create List
 					</button>
 					<button
-						className="bg-white text-black border-[1.5px] border-black rounded-3xl shadow-[0_4px_4px_rgba(0,0,0,0.4)] py-2 px-12 hover:bg-medium-gray "
+						className="bg-white text-black border-[1.5px] border-black rounded-3xl shadow-[0_4px_4px_rgba(0,0,0,0.4)] py-2 px-12 hover:bg-medium-gray"
 						onClick={handleJoinExistingList}
 					>
 						Join List
 					</button>
 				</div>
-				{showJoinList && (
-					<form onSubmit={handleTokenSubmit}>
-						<h3 className="">Want to join an existing list?</h3>
-						<label htmlFor="token"> Enter Token:</label>
-						<input
-							type="text"
-							name="token"
-							id="token"
-							value={token}
-							onChange={handleFormChange}
-							required
-							aria-describedby="token-desc"
-						/>
-						<button type="submit"> Join</button>
-						<div id="token-desc">
-							A token is three space-separated words, like{' '}
-							<code>my list token</code>
-						</div>
-					</form>
-				)}
-				<p>{listNotFound}</p>
-
+				{showJoinList &&
+					ReactDOM.createPortal(
+						<JoinListModal
+							handleTokenSubmit={handleTokenSubmit}
+							token={token}
+							handleFormChange={handleFormChange}
+							closeJoinExistingList={closeJoinExistingList}
+							listNotFound={listNotFound}
+						/>,
+						document.getElementById('overlay-root'),
+					)}
 				<NavLink to="/about" className="text-m font-bold hover:text-main">
 					Learn how Limey works &raquo;
 				</NavLink>
