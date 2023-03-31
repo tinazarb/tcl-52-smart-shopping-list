@@ -1,9 +1,9 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-export function About() {
+export function About({ listToken }) {
 	return (
-		<div className="h-screen flex flex-col pt-[5%] p-20">
+		<div className="h-screen flex flex-col pl-20 pr-20 pb-20">
 			<img
 				className="w-20 mb-5 self-center"
 				src="../../public/img/limey.png"
@@ -45,11 +45,19 @@ export function About() {
 				member, and they can use it to join your list from Limey's home screen.
 			</p>
 			<div className="self-center">
-				<NavLink to="/" id="return-home">
-					<button className="bg-main-darkest text-white border-[1.5px] border-main-darkest rounded-3xl shadow-[0_4px_4px_rgba(0,0,0,0.4)] py-2 px-12 hover:bg-charcoal hover:border-charcoal mb-20">
-						Get Started &raquo;
-					</button>
-				</NavLink>
+				{listToken ? (
+					<NavLink to="/list">
+						<button className="bg-main-darkest text-white border-[1.5px] border-main-darkest rounded-3xl shadow-[0_4px_4px_rgba(0,0,0,0.4)] py-2 px-12 hover:bg-charcoal hover:border-charcoal mb-20">
+							Return to List
+						</button>
+					</NavLink>
+				) : (
+					<NavLink to="/" id="return-home">
+						<button className="bg-main-darkest text-white border-[1.5px] border-main-darkest rounded-3xl shadow-[0_4px_4px_rgba(0,0,0,0.4)] py-2 px-12 hover:bg-charcoal hover:border-charcoal mb-20">
+							Get Started &raquo;
+						</button>
+					</NavLink>
+				)}
 			</div>
 		</div>
 	);
