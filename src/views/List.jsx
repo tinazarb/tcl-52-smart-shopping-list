@@ -1,15 +1,14 @@
-import './List.css';
 import { ListItems } from '../components';
 import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useNavigate } from 'react-router-dom';
+import { ListHeader } from '../components/ListHeader';
 
-import { faClipboard } from '@fortawesome/free-solid-svg-icons';
+import { AddItem } from './AddItem';
 
 export function List({ data, listToken, tokenHistory }) {
-	//set state
 	const [searchedItem, setSearchedItem] = useState('');
-	const [copiedToken, setCopiedToken] = useState(false);
+	const [showAddItem, setShowAddItem] = useState(false);
+
 	//filtering items searched
 	const filteredItems = data.filter((item) =>
 		item.name.toLowerCase().includes(searchedItem.toLowerCase()),
@@ -23,62 +22,87 @@ export function List({ data, listToken, tokenHistory }) {
 		setSearchedItem('');
 	}
 
-	const copyTokenToClipboard = () => {
-		window.navigator.clipboard.writeText(listToken);
-		setCopiedToken(true);
-
-		setTimeout(() => {
-			setCopiedToken(false);
-		}, 2000);
+	let navigate = useNavigate();
+	const directAboutPage = () => {
+		let path = `/about`;
+		navigate(path);
 	};
 
 	return (
 		<>
 			{/* welcome people to add to their list if it's empty */}
 			{data.length === 0 ? (
-				<div>
-					<h4>
-						<span>Sharing Token: {listToken}</span>
-						<FontAwesomeIcon
-							icon={faClipboard}
-							style={{ cursor: 'pointer', marginLeft: '10px' }}
-							onClick={copyTokenToClipboard}
-						/>
-					</h4>
-					{copiedToken && <p>Copied to clipboard!</p>}
-					<h2>
-						You have nothing on your list yet! Click below to add your first
-						item:
+				<div
+					className={`${
+						showAddItem &&
+						'top-0 left-0 block bg-black/[0.5] h-screen w-screen z-[1]content-none'
+					}`}
+				>
+					<ListHeader listToken={listToken} showAddItem={showAddItem} />
+					<h2 className="text-center text-lg">
+						Your shopping list is currently empty.
 					</h2>
-					<button>
-						<NavLink className="link" to="/add-item" id="add-item-from-list">
-							Add Item
-						</NavLink>
-					</button>
-					<div className="list-icon">
-						<div className="list-icon-container">
-							<img
-								src="../../public/img/robot-wink.png"
-								alt="robot winking"
-								id="list-robot-img"
-							/>
-						</div>
+					<div className="flex justify-center items-center gap-2 mt-1">
+						<button
+							className={`text-sm font-bold ${
+								!showAddItem && 'hover:text-main'
+							}`}
+							disabled={showAddItem}
+							onClick={() => setShowAddItem(true)}
+						>
+							Add your first item
+						</button>
+						<div>|</div>
+						<button
+							className={`text-sm font-bold ${
+								!showAddItem && 'hover:text-main'
+							}`}
+							disabled={showAddItem}
+							onClick={directAboutPage}
+						>
+							Learn how Limey works &raquo;
+						</button>
 					</div>
 				</div>
 			) : (
 				// otherwise show people their by collection name
 				<div>
-					{/* <h1>Welcome back!</h1> */}
-					<h4>
-						<span>Sharing Token: {listToken}</span>
-						<FontAwesomeIcon
-							icon={faClipboard}
-							style={{ cursor: 'pointer', marginLeft: '10px' }}
-							onClick={copyTokenToClipboard}
-						/>
-					</h4>
-					{copiedToken && <p>Copied to clipboard!</p>}
-
+					<div
+						className={`${
+							showAddItem &&
+							'top-0 left-0 block bg-black/[0.5] h-screen w-screen z-[1]content-none'
+						}`}
+					>
+						<ListHeader listToken={listToken} showAddItem={showAddItem} />
+						<h2 className="text-center text-lg">
+							You have
+							<strong className="text-main-dark">
+								{data.length === 1 ? ' 1 item ' : ` ${data.length} items `}
+							</strong>
+							on your shopping list
+						</h2>
+						<div className="flex justify-center items-center gap-2 mt-1">
+							<button
+								className={`text-sm font-bold ${
+									!showAddItem && 'hover:text-main'
+								}`}
+								disabled={showAddItem}
+								onClick={() => setShowAddItem(true)}
+							>
+								Add more items
+							</button>
+							<div>|</div>
+							<button
+								className={`text-sm font-bold ${
+									!showAddItem && 'hover:text-main'
+								}`}
+								disabled={showAddItem}
+								onClick={directAboutPage}
+							>
+								Learn how Limey works &raquo;
+							</button>
+						</div>
+					</div>
 					<div className="search-container">
 						<form>
 							<label htmlFor="filter">Filter Items:</label>
@@ -132,6 +156,12 @@ export function List({ data, listToken, tokenHistory }) {
 					</div>
 				</div>
 			)}
+			<AddItem
+				listToken={listToken}
+				data={data}
+				showAddItem={showAddItem}
+				setShowAddItem={setShowAddItem}
+			/>
 		</>
 	);
 }
