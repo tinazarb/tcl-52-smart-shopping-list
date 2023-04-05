@@ -1,15 +1,14 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
-import { config } from '../../secrets';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-	apiKey: config.FIREBASE_API_KEY,
-	authDomain: config.FIREBASE_AUTH_DOMAIN,
-	projectId: config.FIREBASE_PROJECT_ID,
-	storageBucket: config.FIREBASE_STORAGE_BUCKET,
-	messagingSenderId: config.FIREBASE_MESSAGING_SENDER_ID,
-	appId: config.FIREBASE_APP_ID,
+	apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+	authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+	projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+	storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+	messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+	appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
 
 // Initialize Firebase
