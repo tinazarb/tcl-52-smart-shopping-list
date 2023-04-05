@@ -1,8 +1,9 @@
-// TODO lower banner display that disappears on either next submission OR leaving the page
 import { addItem } from '../api/firebase';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './AddItem.css';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 import {
 	Box,
@@ -18,7 +19,30 @@ import {
 	ThemeProvider,
 } from '@mui/material';
 
-export function AddItem({ listToken, data }) {
+export function AddItem({ listToken, data, showAddItem, setShowAddItem }) {
+	const itemNameRef = useRef(); // ref for the item name field
+
+	useEffect(() => {
+		if (showAddItem) {
+			itemNameRef.current.focus();
+		}
+	}, [showAddItem]);
+
+	useEffect(() => {
+		const handleKeyEvents = (e) => {
+			// close panel if user hits Escape (27)
+			if (e.keyCode === 27) setShowAddItem(false);
+		};
+
+		if (showAddItem) {
+			// when panel opens, add eventListeners and put initial focus on item field
+			document.addEventListener('keydown', handleKeyEvents);
+		}
+		return () => {
+			document.removeEventListener('keydown', handleKeyEvents);
+		};
+	}, [showAddItem, setShowAddItem]);
+
 	const redirect = useNavigate();
 
 	const CustomFontTheme = createTheme({
@@ -101,152 +125,119 @@ export function AddItem({ listToken, data }) {
 			await addItem(listToken, itemData);
 			setItemName('');
 			setNextPurchase(soon);
-			setSubmissionYes(`${itemName} successfully added to list!`);
+			setSubmissionYes(`${itemName} added to your list!`);
+			setTimeout(() => {
+				setSubmissionYes('');
+			}, 2000);
 		} catch (err) {
-			setSubmissionYes('Please try again, something went wrong :D');
+			setSubmissionYes('Please try again, something went wrong.');
+			setTimeout(() => {
+				setSubmissionYes('');
+			}, 2000);
 		}
 	};
 
-	const primaryTypographyProps = {
-		style: {
-			fontFamily:
-				"'Manrope', sans-serif, -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Ubuntu, roboto, noto, arial, sans-serif",
-			fontWeight: '600',
-			fontSize: '1.6rem',
-			lineHeight: '1.4',
-			color: 'var(--color-aqua-blue)',
-			paddingTop: '.8rem',
-		},
-	};
+	// className = 'bg-medium-gray flex flex-col items-center justify-end';
 
-	const secondaryTypographyProps = {
-		style: {
-			fontFamily:
-				"'Manrope', sans-serif, -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Ubuntu, roboto, noto, arial, sans-serif",
-			fontWeight: '600',
-			fontSize: '1.3rem',
-			lineHeight: '1.4',
-			color: 'var(--color-aqua-blue)',
-		},
-	};
-
-	return (
-		<div className="Add-item">
-			{!submissionYes ? (
-				<Box
-					sx={{
-						width: '100%',
-						height: 'auto',
-						border: '.05rem solid #2c7d8c',
-						padding: '2rem',
-					}}
-				>
-					<FormControl onSubmit={submitForm} component="form" fullWidth>
+	return !showAddItem ? (
+		<div className="flex justify-center">
+			<button
+				onClick={() => setShowAddItem(!showAddItem)}
+				aria-label="Open Add Item Form"
+				aria-expanded={showAddItem}
+			>
+				<FontAwesomeIcon
+					icon={faPlus}
+					className="text-8xl aspect-square shadow-[0_4px_4px_rgba(0,0,0,0.5)] bg-main-darkest rounded-full border text-white hover:scale-105 fixed bottom-16"
+					transform="shrink-3"
+					aria-hidden="true"
+					focusable="false"
+				/>
+			</button>
+		</div>
+	) : (
+		<div className="absolute h-fit transition-all ease-in-out duration-1000 w-full h-[75%] p-20 bg-charcoal text-white flex flex-col items-center rounded-xl inset-x-0 bottom-0 text-sm z-10 ">
+			<button
+				onClick={() => setShowAddItem(!showAddItem)}
+				aria-label="Close Add Item Form"
+				aria-expanded={showAddItem}
+			>
+				<FontAwesomeIcon
+					icon={faPlus}
+					className="rotate-45 text-6xl aspect-square shadow-[0_4px_4px_rgba(0,0,0,0.5)] bg-main-darkest rounded-full border text-white -mt-8 hover:scale-105"
+					transform="shrink-3"
+					aria-hidden="true"
+					focusable="false"
+				/>
+			</button>
+			<Box>
+				<FormControl onSubmit={submitForm} component="form" fullWidth>
+					<FormLabel>
+						<Typography className="text-white">
+							Add Item to Shopping List
+						</Typography>
+					</FormLabel>
+					<ThemeProvider className="text-white" theme={CustomFontTheme}>
+						<TextField
+							className="text-white"
+							ref={itemNameRef}
+							id="addItemInput"
+							type="text"
+							variant="standard"
+							value={itemName}
+							sx={{ fontSize: '1.6rem' }}
+							error={isFormInvalid}
+							helperText={formError.itemName}
+							onChange={handleChangeItem}
+							required
+						/>
+					</ThemeProvider>
+					<div>
 						<FormLabel>
-							<Typography {...primaryTypographyProps}>
-								Add Item to Shopping List
+							<Typography className="text-white">
+								How soon will you buy this again?
 							</Typography>
 						</FormLabel>
-						<ThemeProvider theme={CustomFontTheme}>
-							<TextField
-								id="addItemInput"
-								type="text"
-								label="Item Name"
-								variant="standard"
-								value={itemName}
-								sx={{ fontSize: '1.6rem' }}
-								error={isFormInvalid}
-								helperText={formError.itemName}
-								onChange={handleChangeItem}
-							/>
-						</ThemeProvider>
-						<div>
-							<FormLabel>
-								<Typography {...primaryTypographyProps}>
-									How soon will you buy this again?
-								</Typography>
-							</FormLabel>
-							<RadioGroup defaultValue="soon" name="radio-buttons-group">
-								<FormControlLabel
-									id="soon"
-									label={
-										<Typography {...secondaryTypographyProps}>
-											1 Week
-										</Typography>
-									}
-									name="buyAgain"
-									control={<Radio />}
-									value={soon}
-									checked={nextPurchase === soon}
-									onChange={handleChange}
-								/>
-								<FormControlLabel
-									id="kindOfSoon"
-									label={
-										<Typography {...secondaryTypographyProps}>
-											2 Weeks
-										</Typography>
-									}
-									name="buyAgain"
-									control={<Radio />}
-									value={kindOfSoon}
-									checked={nextPurchase === kindOfSoon}
-									onChange={handleChange}
-								/>
-								<FormControlLabel
-									id="notSoon"
-									label={
-										<Typography {...secondaryTypographyProps}>
-											1 Month
-										</Typography>
-									}
-									name="buyAgain"
-									control={<Radio />}
-									value={notSoon}
-									checked={nextPurchase === notSoon}
-									onChange={handleChange}
-								/>
-							</RadioGroup>
-						</div>
-						<Button
-							type="submit"
-							variant="contained"
-							sx={{ backgroundColor: '#0048AD' }}
+						<RadioGroup
+							defaultValue="soon"
+							name="radio-buttons-group"
+							className="text-white"
 						>
-							Add Item
-						</Button>
-					</FormControl>
-				</Box>
-			) : (
-				<div className="add-item-success">
-					<p>{submissionYes}</p>
-					<div className="add-icon">
-						<div className="add-icon-container">
-							<img
-								src="../../public/img/robot-success.png"
-								alt="robot hands on hips triumphant"
-								id="add-robot-img"
+							<FormControlLabel
+								id="soon"
+								label={<Typography>soon (1 week)</Typography>}
+								name="buyAgain"
+								control={<Radio />}
+								value={soon}
+								checked={nextPurchase === soon}
+								onChange={handleChange}
 							/>
-						</div>
+							<FormControlLabel
+								id="kindOfSoon"
+								label={<Typography>kind of soon (2 weeks)</Typography>}
+								name="buyAgain"
+								control={<Radio />}
+								value={kindOfSoon}
+								checked={nextPurchase === kindOfSoon}
+								onChange={handleChange}
+							/>
+							<FormControlLabel
+								id="notSoon"
+								label={<Typography>not soon (1 month)</Typography>}
+								name="buyAgain"
+								control={<Radio />}
+								value={notSoon}
+								checked={nextPurchase === notSoon}
+								onChange={handleChange}
+							/>
+						</RadioGroup>
 					</div>
-					<button
-						onClick={() => {
-							setSubmissionYes('');
-							setFormError({});
-							setIsFormInvalid(false);
-						}}
-					>
-						Add Another Item
-					</button>
-					<button
-						onClick={() => {
-							redirect('/list');
-						}}
-					>
-						Return to List
-					</button>
-				</div>
-			)}
+					<Button type="submit" variant="contained">
+						Add Item
+					</Button>
+				</FormControl>
+			</Box>
+			{submissionYes}
 		</div>
 	);
 }
