@@ -66,13 +66,13 @@ export function List({ data, listToken, tokenHistory }) {
 				</div>
 			) : (
 				// otherwise show people their by collection name
-				<div>
-					<div
-						className={`${
-							showAddItem &&
-							'top-0 left-0 block bg-black/[0.5] h-screen w-screen z-[1]content-none'
-						}`}
-					>
+				<div
+					className={`${
+						showAddItem &&
+						'top-0 left-0 block bg-black/[0.5] h-screen w-screen z-[1] content-none overflow-y-hidden'
+					}`}
+				>
+					<div>
 						<ListHeader listToken={listToken} showAddItem={showAddItem} />
 						<h2 className="text-center text-lg">
 							You have
@@ -103,25 +103,33 @@ export function List({ data, listToken, tokenHistory }) {
 							</button>
 						</div>
 					</div>
-					<div className="search-container">
+					<div className="pl-10 pr-10">
 						<form>
-							<label htmlFor="filter">Filter Items:</label>
-							<input
-								id="filter"
-								type="text"
-								inputMode="search"
-								value={searchedItem}
-								onChange={handleChange}
-								placeholder="Start Typing here..."
-							/>
-							<button
-								type="button"
-								onClick={buttonClick}
-								disabled={searchedItem.length === 0}
-								className="clearButton"
-							>
-								Clear
-							</button>
+							<label htmlFor="filter" className="text-charcoal pl-3">
+								Filter Items:
+							</label>
+							<div className="flex flex-row">
+								<div className="bg-medium-gray rounded-full h-10 px-4 flex gap-0 w-[90%]">
+									<input
+										className="bg-medium-gray w-[90%] placeholder:italic mx-4 text-base w-full outline-none"
+										id="filter"
+										type="text"
+										inputMode="search"
+										value={searchedItem}
+										onChange={handleChange}
+										placeholder="Start Typing here..."
+										disabled={showAddItem}
+									/>
+								</div>
+								<button
+									type="button"
+									onClick={buttonClick}
+									disabled={searchedItem.length === 0}
+									className="flex-auto items-start cursor-pointer hover:text-main-dark pl-2"
+								>
+									Clear
+								</button>
+							</div>
 						</form>
 					</div>
 					<div className="shopping-list">
@@ -129,16 +137,7 @@ export function List({ data, listToken, tokenHistory }) {
 							{/* sort items by urgency */}
 							{!filteredItems.length ? (
 								<>
-									<p>{searchedItem} is not on your Shopping List</p>
-									<div className="list-icon">
-										<div className="list-icon-container">
-											<img
-												src="../../public/img/robot-mad.png"
-												alt="upset robot with steam coming out of ears"
-												id="list-robot-img"
-											/>
-										</div>
-									</div>
+									<p className="pl-[5%] pt-5 text-charcoal"> No items found</p>
 								</>
 							) : (
 								filteredItems.map((list) => {
