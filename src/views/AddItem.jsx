@@ -137,8 +137,6 @@ export function AddItem({ listToken, data, showAddItem, setShowAddItem }) {
 		}
 	};
 
-	// className = 'bg-medium-gray flex flex-col items-center justify-end';
-
 	return !showAddItem ? (
 		<div className="flex justify-center">
 			<button
@@ -148,7 +146,7 @@ export function AddItem({ listToken, data, showAddItem, setShowAddItem }) {
 			>
 				<FontAwesomeIcon
 					icon={faPlus}
-					className="text-8xl aspect-square shadow-[0_4px_4px_rgba(0,0,0,0.5)] bg-main-darkest rounded-full border text-white hover:scale-105 fixed bottom-16"
+					className="text-7xl aspect-square shadow-[0_4px_4px_rgba(0,0,0,0.5)] bg-main-darkest rounded-full border text-white hover:scale-105 fixed bottom-16"
 					transform="shrink-3"
 					aria-hidden="true"
 					focusable="false"
@@ -156,7 +154,7 @@ export function AddItem({ listToken, data, showAddItem, setShowAddItem }) {
 			</button>
 		</div>
 	) : (
-		<div className="absolute h-fit transition-all ease-in-out duration-1000 w-full h-[75%] p-20 bg-charcoal text-white flex flex-col items-center rounded-xl inset-x-0 bottom-0 text-sm z-10 ">
+		<div className="absolute h-fit w-full h-[85%] bg-charcoal text-white flex flex-col items-center rounded-xl inset-x-0 bottom-0 text-sm z-10 ">
 			<button
 				onClick={() => setShowAddItem(!showAddItem)}
 				aria-label="Close Add Item Form"
@@ -164,79 +162,68 @@ export function AddItem({ listToken, data, showAddItem, setShowAddItem }) {
 			>
 				<FontAwesomeIcon
 					icon={faPlus}
-					className="rotate-45 text-6xl aspect-square shadow-[0_4px_4px_rgba(0,0,0,0.5)] bg-main-darkest rounded-full border text-white -mt-8 hover:scale-105"
+					className="text-7xl rotate-45 text-6xl aspect-square shadow-[0_4px_4px_rgba(0,0,0,0.5)] bg-main-darkest rounded-full border text-white -mt-8 hover:scale-105"
 					transform="shrink-3"
 					aria-hidden="true"
 					focusable="false"
 				/>
 			</button>
-			<Box>
-				<FormControl onSubmit={submitForm} component="form" fullWidth>
-					<FormLabel>
-						<Typography className="text-white">
-							Add Item to Shopping List
-						</Typography>
-					</FormLabel>
-					<ThemeProvider className="text-white" theme={CustomFontTheme}>
-						<TextField
-							className="text-white"
-							ref={itemNameRef}
-							id="addItemInput"
-							type="text"
-							variant="standard"
-							value={itemName}
-							sx={{ fontSize: '1.6rem' }}
-							error={isFormInvalid}
-							helperText={formError.itemName}
-							onChange={handleChangeItem}
-							required
+			<form onSubmit={submitForm} className="flex flex-col items-center">
+				<h1 className="text-white p-5 text-2xl">Add a new item </h1>
+				<input
+					className="bg-light-charcoal text-white rounded-full py-2 pl-3 w-[100%] outline-white mb-[10%]"
+					ref={itemNameRef}
+					id="addItemInput"
+					type="text"
+					variant="standard"
+					value={itemName}
+					error={isFormInvalid}
+					helperText={formError.itemName}
+					onChange={handleChangeItem}
+					required
+				/>
+				<div className="mb-[10%]">
+					<h2 className="text-white text-lg pb-[5%]">
+						How soon will you buy this again?
+					</h2>
+					<RadioGroup defaultValue="soon" className="text-white">
+						<FormControlLabel
+							id="soon"
+							label={<Typography>soon (1 week)</Typography>}
+							name="buyAgain"
+							control={<Radio />}
+							value={soon}
+							checked={nextPurchase === soon}
+							onChange={handleChange}
 						/>
-					</ThemeProvider>
-					<div>
-						<FormLabel>
-							<Typography className="text-white">
-								How soon will you buy this again?
-							</Typography>
-						</FormLabel>
-						<RadioGroup
-							defaultValue="soon"
-							name="radio-buttons-group"
-							className="text-white"
-						>
-							<FormControlLabel
-								id="soon"
-								label={<Typography>soon (1 week)</Typography>}
-								name="buyAgain"
-								control={<Radio />}
-								value={soon}
-								checked={nextPurchase === soon}
-								onChange={handleChange}
-							/>
-							<FormControlLabel
-								id="kindOfSoon"
-								label={<Typography>kind of soon (2 weeks)</Typography>}
-								name="buyAgain"
-								control={<Radio />}
-								value={kindOfSoon}
-								checked={nextPurchase === kindOfSoon}
-								onChange={handleChange}
-							/>
-							<FormControlLabel
-								id="notSoon"
-								label={<Typography>not soon (1 month)</Typography>}
-								name="buyAgain"
-								control={<Radio />}
-								value={notSoon}
-								checked={nextPurchase === notSoon}
-								onChange={handleChange}
-							/>
-						</RadioGroup>
-					</div>
-					<Button type="submit" variant="contained">
-						Add Item
-					</Button>
-				</FormControl>
-			</Box>
+						<FormControlLabel
+							id="kindOfSoon"
+							label={<Typography>kind of soon (2 weeks)</Typography>}
+							name="buyAgain"
+							control={<Radio />}
+							value={kindOfSoon}
+							checked={nextPurchase === kindOfSoon}
+							onChange={handleChange}
+						/>
+						<FormControlLabel
+							id="notSoon"
+							label={<Typography>not soon (1 month)</Typography>}
+							name="buyAgain"
+							control={<Radio />}
+							value={notSoon}
+							checked={nextPurchase === notSoon}
+							onChange={handleChange}
+						/>
+					</RadioGroup>
+				</div>
+				<button
+					type="submit"
+					variant="contained"
+					className="bg-light-charcoal text-white rounded-3xl py-2 px-12 hover:bg-medium-gray mb-[10%] w-[100%]"
+				>
+					Add Item
+				</button>
+			</form>
 			{submissionYes}
 		</div>
 	);
