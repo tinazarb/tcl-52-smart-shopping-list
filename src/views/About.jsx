@@ -4,11 +4,7 @@ import { NavLink } from 'react-router-dom';
 export function About({ listToken }) {
 	return (
 		<div className="h-screen flex flex-col pl-20 pr-20 pb-20">
-			<img
-				className="w-20 mb-5 self-center"
-				src="../../public/img/limey.png"
-				alt="logo"
-			/>
+			<img className="w-20 mb-5 self-center" src="/img/limey.png" alt="logo" />
 
 			<h1 className="text-4xl font-bold mb-10 self-center">
 				Learn How <strong className="text-main-darkest">Limey</strong> Works

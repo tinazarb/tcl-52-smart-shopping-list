@@ -58,7 +58,7 @@ export function Home({
 	return (
 		<div className="h-screen flex flex-col items-center justify-between relative pt-[5%]">
 			<div className="flex flex-col items-center gap-6">
-				<img className="w-20" src="../../public/img/limey.png" alt="logo" />
+				<img className="w-20" src="/img/limey.png" alt="logo" />
 				<h1 className="text-6xl font-logo -my-2">Limey</h1>
 				<h2 className="text-2xl font-logo text-center px-5">
 					Welcome to your <strong className="text-main-darkest"> smart</strong>{' '}
