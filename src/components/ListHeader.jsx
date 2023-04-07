@@ -15,8 +15,8 @@ export function ListHeader({ listToken, showAddItem }) {
 		}, 3000);
 	};
 	return (
-		<header className="py-8">
-			<div className="flex items-start py-8 px-10">
+		<header className="pt-8">
+			<div className="flex items-start pt-8 px-10">
 				<img src="/img/limey.png" alt="logo" className="w-10" />
 				<h1 className="font-medium text-3xl pl-2 mr-auto">Limey</h1>
 				<div>
@@ -49,7 +49,7 @@ export function ListHeader({ listToken, showAddItem }) {
 						readOnly
 					/>
 				)}
-				{copiedToken && <p className="text-main">Copied to clipboard!</p>}
+				{copiedToken && <p className="text-main pb-5">Copied to clipboard!</p>}
 			</div>
 		</header>
 	);
