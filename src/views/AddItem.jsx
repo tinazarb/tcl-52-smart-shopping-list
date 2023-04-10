@@ -5,37 +5,15 @@ import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
-import {
-	Box,
-	Button,
-	FormControl,
-	FormLabel,
-	FormControlLabel,
-	RadioGroup,
-	Radio,
-	TextField,
-	Typography,
-	createTheme,
-	ThemeProvider,
-} from '@mui/material';
+import { FormControlLabel, RadioGroup, Radio, Typography } from '@mui/material';
 
 export function AddItem({ listToken, data, showAddItem, setShowAddItem }) {
-	const itemNameRef = useRef(); // ref for the item name field
-
-	useEffect(() => {
-		if (showAddItem) {
-			itemNameRef.current.focus();
-		}
-	}, [showAddItem]);
-
 	useEffect(() => {
 		const handleKeyEvents = (e) => {
-			// close panel if user hits Escape (27)
 			if (e.keyCode === 27) setShowAddItem(false);
 		};
 
 		if (showAddItem) {
-			// when panel opens, add eventListeners and put initial focus on item field
 			document.addEventListener('keydown', handleKeyEvents);
 		}
 		return () => {
@@ -44,12 +22,6 @@ export function AddItem({ listToken, data, showAddItem, setShowAddItem }) {
 	}, [showAddItem, setShowAddItem]);
 
 	const redirect = useNavigate();
-
-	const CustomFontTheme = createTheme({
-		typography: {
-			fontSize: '1.6rem',
-		},
-	});
 
 	//itemName behaviour
 	const [itemName, setItemName] = useState('');
@@ -138,7 +110,7 @@ export function AddItem({ listToken, data, showAddItem, setShowAddItem }) {
 	};
 
 	return !showAddItem ? (
-		<div className="flex justify-center">
+		<div className="flex flex-column justify-center">
 			<button
 				onClick={() => setShowAddItem(!showAddItem)}
 				aria-label="Open Add Item Form"
@@ -146,7 +118,7 @@ export function AddItem({ listToken, data, showAddItem, setShowAddItem }) {
 			>
 				<FontAwesomeIcon
 					icon={faPlus}
-					className="text-7xl aspect-square shadow-[0_4px_4px_rgba(0,0,0,0.5)] bg-main-darkest rounded-full border text-white hover:scale-105 fixed bottom-16"
+					className="text-7xl aspect-square shadow-[0_4px_4px_rgba(0,0,0,0.5)] bg-main-darkest rounded-full border text-white hover:scale-105 fixed bottom-8 inset-x-[45%] mt-[10%]  max-sm:inset-x-[40%]"
 					transform="shrink-3"
 					aria-hidden="true"
 					focusable="false"
@@ -154,7 +126,7 @@ export function AddItem({ listToken, data, showAddItem, setShowAddItem }) {
 			</button>
 		</div>
 	) : (
-		<div className="absolute h-fit w-full h-[85%] bg-charcoal text-white flex flex-col items-center rounded-xl inset-x-0 bottom-0 text-sm z-10 ">
+		<div className="absolute h-[85%] w-full bg-charcoal text-white flex flex-col items-center rounded-xl inset-x-0 bottom-0 text-sm z-10">
 			<button
 				onClick={() => setShowAddItem(!showAddItem)}
 				aria-label="Close Add Item Form"
@@ -172,7 +144,7 @@ export function AddItem({ listToken, data, showAddItem, setShowAddItem }) {
 				<h1 className="text-white p-5 text-2xl">Add a new item </h1>
 				<input
 					className="bg-light-charcoal text-white rounded-full py-2 pl-3 w-[100%] outline-white mb-[10%]"
-					ref={itemNameRef}
+					// ref={itemNameRef}
 					id="addItemInput"
 					type="text"
 					variant="standard"
@@ -224,7 +196,7 @@ export function AddItem({ listToken, data, showAddItem, setShowAddItem }) {
 					Add Item
 				</button>
 			</form>
-			{submissionYes}
+			{/* {submissionYes} */}
 		</div>
 	);
 }
