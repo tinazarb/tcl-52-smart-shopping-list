@@ -1,11 +1,13 @@
-import './ListItem.css';
 import { useState } from 'react';
 import { updateItem, deleteItem } from '../api';
 import { getDaysBetweenDates } from '../utils';
 import { calculateEstimate } from '@the-collab-lab/shopping-list-utils';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircle } from '@fortawesome/free-solid-svg-icons';
+import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
+
 import {
-	Checkbox,
 	List,
 	ListItem,
 	ListItemText,
@@ -37,44 +39,48 @@ export function ListItems({ name, data, listToken }) {
 		}
 	}
 
-	const primaryTypographyProps = {
-		style: {
-			fontFamily:
-				"'Manrope', sans-serif, -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Ubuntu, roboto, noto, arial, sans-serif",
-			fontWeight: '600',
-			fontSize: '1.6rem',
-			lineHeight: '1.4',
-		},
-	};
-
 	return (
 		<>
 			<List dense>
-				<ListItem
-					secondaryAction={
-						<IconButton
-							edge="end"
-							aria-label="delete"
-							onClick={handleDeleteItem}
-						>
-							<DeleteIcon />
-						</IconButton>
-					}
-				>
-					<Checkbox
-						className="ListItem-checkbox"
-						id="listItem"
-						checked={isChecked}
-						onChange={handleSelect}
-					/>
-					<ListItemText
-						primary={
-							<Typography {...primaryTypographyProps}>{name}</Typography>
+				<div className="border-solid border-b-2 ml-[5%] mr-[5%]">
+					<ListItem
+						secondaryAction={
+							<div>
+								<label>{data.urgency}</label>
+								<IconButton
+									edge="end"
+									aria-label="delete"
+									onClick={handleDeleteItem}
+								>
+									<DeleteIcon />
+								</IconButton>
+							</div>
 						}
-					/>
-
-					<label className="ListItem-urgency">{data.urgency}</label>
-				</ListItem>
+					>
+						<label>
+							<input
+								type="checkbox"
+								id={name}
+								checked={isChecked}
+								onChange={handleSelect}
+								className="hidden"
+							/>
+							{isChecked && (
+								<FontAwesomeIcon
+									icon={faCircleCheck}
+									className="text-main-light mr-2 text-xl self-center peer-focus:ring rounded"
+								/>
+							)}
+							{!isChecked && (
+								<FontAwesomeIcon
+									icon={faCircle}
+									className="text-main-dark mr-2 hover:cursor-pointer text-xl self-center peer-focus:ring rounded"
+								/>
+							)}
+						</label>
+						<ListItemText primary={<Typography>{name}</Typography>} />
+					</ListItem>
+				</div>
 			</List>
 		</>
 	);

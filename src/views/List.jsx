@@ -29,7 +29,7 @@ export function List({ data, listToken, tokenHistory }) {
 	};
 
 	return (
-		<>
+		<div className="min-w-fit">
 			{/* welcome people to add to their list if it's empty */}
 			{data.length === 0 ? (
 				<div
@@ -103,12 +103,12 @@ export function List({ data, listToken, tokenHistory }) {
 							</button>
 						</div>
 					</div>
-					<div className="pl-10 pr-10">
+					<div className="ml-[5%] mr-[5%]">
 						<form>
-							<label htmlFor="filter" className="text-charcoal pl-3">
+							<label htmlFor="filter" className="text-charcoal text-sm pl-3">
 								Filter Items:
 							</label>
-							<div className="flex flex-row">
+							<div className="flex flex-row pb-[3%]">
 								<div className="bg-medium-gray rounded-full h-10 px-4 flex gap-0 w-[90%]">
 									<input
 										className="bg-medium-gray w-[90%] placeholder:italic mx-4 text-base w-full outline-none"
@@ -125,14 +125,14 @@ export function List({ data, listToken, tokenHistory }) {
 									type="button"
 									onClick={buttonClick}
 									disabled={searchedItem.length === 0}
-									className="flex-auto items-start cursor-pointer hover:text-main-dark pl-2"
+									className="flex-auto items-start cursor-pointer hover:text-white bg-white text-black border-[1.5px] border-charcoal rounded-3xl py-1 px-4 ml-3 hover:bg-charcoal"
 								>
 									Clear
 								</button>
 							</div>
 						</form>
 					</div>
-					<div className="shopping-list">
+					<div className="mb-[15%] max-sm:mb-[30%]">
 						<ul>
 							{/* sort items by urgency */}
 							{!filteredItems.length ? (
@@ -161,6 +161,6 @@ export function List({ data, listToken, tokenHistory }) {
 				showAddItem={showAddItem}
 				setShowAddItem={setShowAddItem}
 			/>
-		</>
+		</div>
 	);
 }
