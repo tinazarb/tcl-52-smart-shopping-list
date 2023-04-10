@@ -41,7 +41,7 @@ export default function JoinListModal({
 				{listNotFound && <p className="text-error mb-1">{listNotFound}</p>}
 				<button
 					type="submit"
-					className="bg-main-darkest text-white border-[1.5px] border-main-darkest rounded-3xl py-2 px-8 mb-3 hover:bg-charcoal hover:border-charcoal w-1/4"
+					className="text-center bg-main-darkest text-white border-[1.5px] border-main-darkest rounded-3xl py-2 mb-3 hover:bg-charcoal hover:border-charcoal w-1/4"
 				>
 					Join
 				</button>
