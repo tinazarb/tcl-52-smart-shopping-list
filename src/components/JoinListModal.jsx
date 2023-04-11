@@ -9,7 +9,7 @@ export default function JoinListModal({
 	listNotFound,
 }) {
 	return (
-		<div className="bg-[rgba(0,0,0,0.5)] w-screen h-screen flex justify-center items-center fixed z-50">
+		<div className="bg-[rgba(0,0,0,0.5)] w-screen h-screen flex justify-center items-center fixed inset-0 z-50">
 			<form
 				onSubmit={handleTokenSubmit}
 				className="bg-white h-fit flex flex-col gap-3 rounded-md px-10 py-7"

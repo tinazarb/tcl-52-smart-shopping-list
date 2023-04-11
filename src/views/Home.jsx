@@ -77,17 +77,15 @@ export function Home({
 						Join List
 					</button>
 				</div>
-				{showJoinList &&
-					ReactDOM.createPortal(
-						<JoinListModal
-							handleTokenSubmit={handleTokenSubmit}
-							token={token}
-							handleFormChange={handleFormChange}
-							closeJoinExistingList={closeJoinExistingList}
-							listNotFound={listNotFound}
-						/>,
-						document.getElementById('overlay-root'),
-					)}
+				{showJoinList && (
+					<JoinListModal
+						handleTokenSubmit={handleTokenSubmit}
+						token={token}
+						handleFormChange={handleFormChange}
+						closeJoinExistingList={closeJoinExistingList}
+						listNotFound={listNotFound}
+					/>
+				)}
 				<NavLink to="/about" className="text-m font-bold hover:text-main">
 					Learn how Limey works &raquo;
 				</NavLink>

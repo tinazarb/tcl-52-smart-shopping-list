@@ -68,17 +68,15 @@ export function ListItems({ name, data, listToken }) {
 							</div>
 						}
 					>
-						{showDeleteModal &&
-							ReactDOM.createPortal(
-								<DeleteItemModal
-									name={name}
-									handleDeleteItem={handleDeleteItem}
-									closeDeleteModal={closeDeleteModal}
-									showDeleteModal={showDeleteModal}
-									setShowDeleteModal={setShowDeleteModal}
-								/>,
-								document.getElementById('overlay-root'),
-							)}
+						{showDeleteModal && (
+							<DeleteItemModal
+								name={name}
+								handleDeleteItem={handleDeleteItem}
+								closeDeleteModal={closeDeleteModal}
+								showDeleteModal={showDeleteModal}
+								setShowDeleteModal={setShowDeleteModal}
+							/>
+						)}
 						<label>
 							<input
 								type="checkbox"
