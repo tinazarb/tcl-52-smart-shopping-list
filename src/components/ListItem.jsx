@@ -9,13 +9,7 @@ import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 
-import {
-	List,
-	ListItem,
-	ListItemText,
-	IconButton,
-	Typography,
-} from '@mui/material';
+import { List, ListItem, ListItemText, IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 import DeleteItemModal from '../components/DeleteItemModal';
@@ -122,7 +116,7 @@ export function ListItems({ name, data, listToken }) {
 								/>
 							)}
 						</label>
-						<ListItemText primary={<Typography>{name}</Typography>} />
+						<ListItemText primary={<h1 className="text-xl">{name}</h1>} />
 					</ListItem>
 					{showItemDetails && (
 						<div className="md:ml-[5%] max-md:ml-[12%] flex md:w-[75%] max-md:w-[45%] flex-wrap justify-between mb-[1%] text-sm">
