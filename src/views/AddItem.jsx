@@ -146,7 +146,7 @@ export function AddItem({ listToken, data, showAddItem, setShowAddItem }) {
 			<form onSubmit={submitForm} className="flex flex-col items-center">
 				<h1 className="text-white p-5 text-2xl">Add a new item </h1>
 				<input
-					className="bg-light-charcoal text-white rounded-full py-2 pl-3 w-[100%] outline-white"
+					className="bg-light-charcoal text-white rounded-full py-2 pl-3 w-[100%] outline-white text-lg"
 					id="addItemInput"
 					type="text"
 					variant="standard"
