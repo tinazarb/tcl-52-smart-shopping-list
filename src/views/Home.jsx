@@ -1,7 +1,6 @@
 import { useCallback, useState } from 'react';
 import { checkListToken } from '../api/firebase';
 import { NavLink, useNavigate } from 'react-router-dom';
-import ReactDOM from 'react-dom';
 import JoinListModal from '../components/JoinListModal';
 
 export function Home({
