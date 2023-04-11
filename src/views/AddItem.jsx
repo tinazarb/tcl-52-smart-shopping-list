@@ -1,6 +1,5 @@
 import { addItem } from '../api/firebase';
-import { useState, useRef, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
@@ -20,8 +19,6 @@ export function AddItem({ listToken, data, showAddItem, setShowAddItem }) {
 			document.removeEventListener('keydown', handleKeyEvents);
 		};
 	}, [showAddItem, setShowAddItem]);
-
-	const redirect = useNavigate();
 
 	//itemName behaviour
 	const [itemName, setItemName] = useState('');
