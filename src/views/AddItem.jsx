@@ -22,6 +22,7 @@ export function AddItem({ listToken, data, showAddItem, setShowAddItem }) {
 
 	//itemName behaviour
 	const [itemName, setItemName] = useState('');
+	const [errorMessage, setErrorMessage] = useState('');
 
 	const handleChangeItem = (e) => {
 		e.preventDefault();
@@ -65,7 +66,12 @@ export function AddItem({ listToken, data, showAddItem, setShowAddItem }) {
 					.replace(/\s+|[~`!@#$%^&*(){}\[\];:"'<,.>?\/\\|_+=-]/g, '')
 					.toLowerCase() === existingItems[i]
 			) {
-				errorCollection.itemName = `${itemName} already exists in your Shopping List`;
+				errorCollection.itemName = `${itemName} is already on your shopping list!`;
+				setErrorMessage(`${itemName} is already on your shopping list!`);
+
+				setTimeout(() => {
+					setErrorMessage('');
+				}, 3000);
 			}
 		}
 
@@ -140,8 +146,7 @@ export function AddItem({ listToken, data, showAddItem, setShowAddItem }) {
 			<form onSubmit={submitForm} className="flex flex-col items-center">
 				<h1 className="text-white p-5 text-2xl">Add a new item </h1>
 				<input
-					className="bg-light-charcoal text-white rounded-full py-2 pl-3 w-[100%] outline-white mb-[10%]"
-					// ref={itemNameRef}
+					className="bg-light-charcoal text-white rounded-full py-2 pl-3 w-[100%] outline-white"
 					id="addItemInput"
 					type="text"
 					variant="standard"
@@ -151,7 +156,8 @@ export function AddItem({ listToken, data, showAddItem, setShowAddItem }) {
 					onChange={handleChangeItem}
 					required
 				/>
-				<div className="mb-[10%]">
+				<p className="text-base text-error font-bold mt-2">{errorMessage}</p>
+				<div className="mt-[10%] mb-[10%]">
 					<h2 className="text-white text-lg pb-[5%]">
 						How soon will you buy this again?
 					</h2>
