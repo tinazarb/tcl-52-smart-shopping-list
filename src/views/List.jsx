@@ -117,7 +117,7 @@ export function List({ data, listToken, tokenHistory }) {
 										inputMode="search"
 										value={searchedItem}
 										onChange={handleChange}
-										placeholder="Start Typing here..."
+										placeholder="Start typing here..."
 										disabled={showAddItem}
 									/>
 								</div>
@@ -137,7 +137,10 @@ export function List({ data, listToken, tokenHistory }) {
 							{/* sort items by urgency */}
 							{!filteredItems.length ? (
 								<>
-									<p className="pl-[5%] pt-5 text-charcoal"> No items found</p>
+									<p className="pt-2 pl-[8%] text-charcoal text-error-dark">
+										{' '}
+										No items found
+									</p>
 								</>
 							) : (
 								filteredItems.map((list) => {

@@ -12,6 +12,7 @@ module.exports = {
 				'light-charcoal': '#807B73',
 				'medium-gray': '#dddce6',
 				error: '#c3360b',
+				'error-dark': '#962A09',
 			},
 		},
 	},
