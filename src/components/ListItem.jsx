@@ -16,7 +16,20 @@ import {
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 
+import DeleteItemModal from '../components/DeleteItemModal';
+import ReactDOM from 'react-dom';
+
 export function ListItems({ name, data, listToken }) {
+	const [showDeleteModal, setShowDeleteModal] = useState(false);
+
+	const openDeleteModal = () => {
+		setShowDeleteModal(true);
+	};
+
+	const closeDeleteModal = () => {
+		setShowDeleteModal(false);
+	};
+
 	const initialChecked =
 		Date.now() - data.dateLastPurchased?.toMillis() < 86400000 || false;
 
@@ -34,9 +47,7 @@ export function ListItems({ name, data, listToken }) {
 	};
 
 	function handleDeleteItem() {
-		if (window.confirm(`Are you sure you wish to delete ${name}?`)) {
-			deleteItem(listToken, data.id);
-		}
+		deleteItem(listToken, data.id);
 	}
 
 	return (
@@ -50,13 +61,24 @@ export function ListItems({ name, data, listToken }) {
 								<IconButton
 									edge="end"
 									aria-label="delete"
-									onClick={handleDeleteItem}
+									onClick={openDeleteModal}
 								>
 									<DeleteIcon />
 								</IconButton>
 							</div>
 						}
 					>
+						{showDeleteModal &&
+							ReactDOM.createPortal(
+								<DeleteItemModal
+									name={name}
+									handleDeleteItem={handleDeleteItem}
+									closeDeleteModal={closeDeleteModal}
+									showDeleteModal={showDeleteModal}
+									setShowDeleteModal={setShowDeleteModal}
+								/>,
+								document.getElementById('overlay-root'),
+							)}
 						<label>
 							<input
 								type="checkbox"
