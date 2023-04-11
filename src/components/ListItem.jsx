@@ -6,6 +6,8 @@ import { calculateEstimate } from '@the-collab-lab/shopping-list-utils';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircle } from '@fortawesome/free-solid-svg-icons';
 import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 
 import {
 	List,
@@ -17,10 +19,10 @@ import {
 import DeleteIcon from '@mui/icons-material/Delete';
 
 import DeleteItemModal from '../components/DeleteItemModal';
-import ReactDOM from 'react-dom';
 
 export function ListItems({ name, data, listToken }) {
 	const [showDeleteModal, setShowDeleteModal] = useState(false);
+	const [showItemDetails, setItemShowDetails] = useState(false);
 
 	const openDeleteModal = () => {
 		setShowDeleteModal(true);
@@ -50,6 +52,19 @@ export function ListItems({ name, data, listToken }) {
 		deleteItem(listToken, data.id);
 	}
 
+	const calculatePurchase = (date) => {
+		if (date) {
+			let dateConvert = new Date(date.toMillis()).toString().split(' ');
+
+			return `${dateConvert[1]} ${dateConvert[2]}`;
+		}
+		return 'N/A';
+	};
+
+	const lastPurchase = calculatePurchase(data.dateLastPurchased);
+
+	const nextPurchase = calculatePurchase(data.dateNextPurchased);
+
 	return (
 		<>
 			<List dense>
@@ -57,7 +72,16 @@ export function ListItems({ name, data, listToken }) {
 					<ListItem
 						secondaryAction={
 							<div>
-								<label>{data.urgency}</label>
+								{showItemDetails && (
+									<IconButton onClick={() => setItemShowDetails(false)}>
+										<ExpandLessIcon />
+									</IconButton>
+								)}
+								{!showItemDetails && (
+									<IconButton onClick={() => setItemShowDetails(true)}>
+										<ExpandMoreIcon />
+									</IconButton>
+								)}
 								<IconButton
 									edge="end"
 									aria-label="delete"
@@ -100,6 +124,23 @@ export function ListItems({ name, data, listToken }) {
 						</label>
 						<ListItemText primary={<Typography>{name}</Typography>} />
 					</ListItem>
+					{showItemDetails && (
+						<div className="md:ml-[5%] max-md:ml-[12%] flex md:w-[75%] max-md:w-[45%] flex-wrap justify-between mb-[1%] text-sm">
+							<p className="text-light-charcoal mr-[5%]">
+								Purchases:{' '}
+								<span className="text-black">{data.totalPurchases}</span>
+							</p>
+							<p className="text-light-charcoal mr-[5%]">
+								Last Purchase:{' '}
+								<span className="text-black">{lastPurchase}</span>
+							</p>
+							<p className="text-light-charcoal mr-[5%]">
+								Next Purchase:{' '}
+								<span className="text-black">~ {nextPurchase}</span>
+							</p>
+							<p className="text-main">{data.urgency}</p>
+						</div>
+					)}
 				</div>
 			</List>
 		</>
