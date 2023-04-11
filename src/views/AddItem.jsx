@@ -166,7 +166,16 @@ export function AddItem({ listToken, data, showAddItem, setShowAddItem }) {
 							id="soon"
 							label={<Typography>soon (1 week)</Typography>}
 							name="buyAgain"
-							control={<Radio />}
+							control={
+								<Radio
+									sx={{
+										color: 'white',
+										'&.Mui-checked': {
+											color: 'white',
+										},
+									}}
+								/>
+							}
 							value={soon}
 							checked={nextPurchase === soon}
 							onChange={handleChange}
@@ -175,7 +184,16 @@ export function AddItem({ listToken, data, showAddItem, setShowAddItem }) {
 							id="kindOfSoon"
 							label={<Typography>kind of soon (2 weeks)</Typography>}
 							name="buyAgain"
-							control={<Radio />}
+							control={
+								<Radio
+									sx={{
+										color: 'white',
+										'&.Mui-checked': {
+											color: 'white',
+										},
+									}}
+								/>
+							}
 							value={kindOfSoon}
 							checked={nextPurchase === kindOfSoon}
 							onChange={handleChange}
@@ -184,7 +202,16 @@ export function AddItem({ listToken, data, showAddItem, setShowAddItem }) {
 							id="notSoon"
 							label={<Typography>not soon (1 month)</Typography>}
 							name="buyAgain"
-							control={<Radio />}
+							control={
+								<Radio
+									sx={{
+										color: 'white',
+										'&.Mui-checked': {
+											color: 'white',
+										},
+									}}
+								/>
+							}
 							value={notSoon}
 							checked={nextPurchase === notSoon}
 							onChange={handleChange}
