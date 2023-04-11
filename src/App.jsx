@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import { AddItem, Home, Layout, List } from './views';
+import { AddItem, Home, Layout, List, PageNotFound } from './views';
 import { About } from './views/About';
 
 import { getItemData, streamListItems } from './api';
@@ -87,6 +87,7 @@ export function App() {
 						element={<AddItem listToken={listToken} data={data} />}
 					/>
 					<Route path="/about" element={<About listToken={listToken} />} />
+					<Route path="*" element={<PageNotFound listToken={listToken} />} />
 				</Route>
 			</Routes>
 		</Router>
