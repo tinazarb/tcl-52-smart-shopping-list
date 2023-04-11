@@ -23,8 +23,8 @@ export default function JoinListModal({
 					Want to join an existing list?
 					<p id="token-desc" className="text-base font-normal mb-6">
 						A token is three space-separated words, like{' '}
-						<code className="bg-medium-gray p-1.5 rounded-lg">
-							my test list
+						<code className="bg-medium-gray p-1.5 rounded-lg text-sm">
+							my grocery list
 						</code>
 					</p>
 					<input
